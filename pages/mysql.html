@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySQL - Базы данных в Web-разработке</title>
+    <link rel="stylesheet" href="../css/tent.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <a href="../index.html" class="logo">
+                        <span class="logo-icon">🗃️</span>
+                        <span class="logo-text">Базы данных</span>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="main-nav">
+                    <li class="nav-item"><a href="../index.html" class="nav-link">Главная</a></li>
+                    <li class="nav-item"><a href="sql.html" class="nav-link">SQL</a></li>
+                    <li class="nav-item"><a href="nosql.html" class="nav-link">NoSQL</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li>
+                    <li class="nav-item"><a href="mysql.html" class="nav-link active">MySQL</a></li>
+                </ul>
+                
+                <button class="nav-toggle" id="nav-toggle" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="layout">
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">🐬 MySQL</h3>
+                        <ul class="sidebar-nav">
+                            <li><a href="#overview" class="sidebar-link">Обзор</a></li>
+                            <li><a href="#features" class="sidebar-link">Возможности</a></li>
+                            <li><a href="#installation" class="sidebar-link">Установка</a></li>
+                            <li><a href="#examples" class="sidebar-link">Примеры</a></li>
+                            <li><a href="#best-practices" class="sidebar-link">Лучшие практики</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">📊 Статистика</h3>
+                        <div class="stats-card">
+                            <div class="stat-item">
+                                <span class="stat-number">#1</span>
+                                <span class="stat-label">Популярность</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">1995</span>
+                                <span class="stat-label">Год выпуска</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <main class="main-content">
+                    <article class="content-card">
+                        <header class="article-header">
+                            <h1 class="article-title">MySQL 🐬</h1>
+                            <p class="article-subtitle">Самая популярная реляционная база данных с открытым исходным кодом</p>
+                        </header>
+
+                        <section id="overview" class="content-section">
+                            <h2>🎯 Обзор MySQL</h2>
+                            <p><strong>MySQL</strong> - это реляционная система управления базами данных с открытым исходным кодом, разработанная компанией Oracle. Это одна из самых популярных СУБД в мире, особенно для веб-приложений.</p>
+                            
+                            <div class="info-card">
+                                <h4>📖 История</h4>
+                                <p>MySQL был создан в 1995 году шведской компанией MySQL AB. В 2008 году был приобретен Sun Microsystems, а в 2010 - Oracle Corporation.</p>
+                            </div>
+
+                            <div class="key-facts">
+                                <h3>🔑 Ключевые факты:</h3>
+                                <ul>
+                                    <li><strong>Тип:</strong> Реляционная СУБД</li>
+                                    <li><strong>Лицензия:</strong> GPL (свободная) и коммерческая</li>
+                                    <li><strong>Разработчик:</strong> Oracle Corporation</li>
+                                    <li><strong>Написана на:</strong> C, C++</li>
+                                    <li><strong>Популярность:</strong> #1 в рейтинге DB-Engines</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section id="features" class="content-section">
+                            <h2>⭐ Основные возможности</h2>
+                            
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon">🚀</div>
+                                    <h3>Производительность</h3>
+                                    <p>Высокая скорость работы, оптимизированные механизмы хранения</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🔒</div>
+                                    <h3>Надежность</h3>
+                                    <p>Полная поддержка ACID, репликация, бэкапы</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🔄</div>
+                                    <h3>Масштабируемость</h3>
+                                    <p>Поддержка репликации и шардинга</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">💾</div>
+                                    <h3>Механизмы хранения</h3>
+                                    <p>InnoDB, MyISAM, Memory и другие</p>
+                                </div>
+                            </div>
+
+                            <h3>📊 Поддерживаемые движки хранения:</h3>
+                            <div class="storage-engines">
+                                <div class="engine">
+                                    <h4>InnoDB</h4>
+                                    <p>Движок по умолчанию, поддерживает транзакции, внешние ключи</p>
+                                </div>
+                                <div class="engine">
+                                    <h4>MyISAM</h4>
+                                    <p>Более простой движок, высокая производительность чтения</p>
+                                </div>
+                                <div class="engine">
+                                    <h4>Memory</h4>
+                                    <p>Хранит данные в оперативной памяти для максимальной скорости</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="installation" class="content-section">
+                            <h2>⚙️ Установка и настройка</h2>
+                            
+                            <h3>Установка на Ubuntu:</h3>
+                            <pre><code># Обновление пакетов
+sudo apt update
+
+# Установка MySQL сервера
+sudo apt install mysql-server
+
+# Запуск службы
+sudo systemctl start mysql
+sudo systemctl enable mysql
+
+# Настройка безопасности
+sudo mysql_secure_installation</code></pre>
+
+                            <h3>Подключение к MySQL:</h3>
+                            <pre><code># Через командную строку
+mysql -u root -p
+
+# Создание пользователя
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+
+# Создание базы данных
+CREATE DATABASE mydatabase;
+
+# Предоставление прав
+GRANT ALL PRIVILEGES ON mydatabase.* TO 'username'@'localhost';</code></pre>
+                        </section>
+
+                        <section id="examples" class="content-section">
+                            <h2>💻 Практические примеры</h2>
+                            
+                            <h3>Создание таблицы:</h3>
+                            <pre><code>CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_active BOOLEAN DEFAULT TRUE
+);</code></pre>
+
+                            <h3>Вставка данных:</h3>
+                            <pre><code>INSERT INTO users (username, email, password_hash) 
+VALUES 
+    ('alice', 'alice@example.com', 'hash123'),
+    ('bob', 'bob@example.com', 'hash456');</code></pre>
+
+                            <h3>Сложный запрос с JOIN:</h3>
+                            <pre><code>SELECT 
+    u.username,
+    COUNT(p.id) as post_count,
+    MAX(p.created_at) as last_post
+FROM users u
+LEFT JOIN posts p ON u.id = p.user_id
+WHERE u.is_active = TRUE
+GROUP BY u.id
+HAVING post_count > 0
+ORDER BY last_post DESC;</code></pre>
+                        </section>
+
+                        <section id="best-practices" class="content-section">
+                            <h2>🎯 Лучшие практики</h2>
+                            
+                            <div class="best-practices-list">
+                                <div class="practice-item">
+                                    <h4>✅ Используйте InnoDB</h4>
+                                    <p>Всегда используйте InnoDB как движок по умолчанию для поддержки транзакций и внешних ключей.</p>
+                                </div>
+                                
+                                <div class="practice-item">
+                                    <h4>✅ Оптимизируйте индексы</h4>
+                                    <p>Создавайте индексы для часто используемых полей в WHERE, JOIN и ORDER BY.</p>
+                                </div>
+                                
+                                <div class="practice-item">
+                                    <h4>✅ Нормализуйте данные</h4>
+                                    <p>Следуйте принципам нормализации для уменьшения избыточности данных.</p>
+                                </div>
+                                
+                                <div class="practice-item">
+                                    <h4>✅ Используйте подготовленные запросы</h4>
+                                    <p>Защищайтесь от SQL-инъекций с помощью подготовленных выражений.</p>
+                                </div>
+                                
+                                <div class="practice-item">
+                                    <h4>✅ Настройте репликацию</h4>
+                                    <p>Используйте репликацию для повышения отказоустойчивости и распределения нагрузки.</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="content-section">
+                            <h2>🔧 Инструменты для работы с MySQL</h2>
+                            
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <h4>MySQL Workbench</h4>
+                                    <p>Официальная графическая утилита для администрирования</p>
+                                </div>
+                                <div class="tool-card">
+                                    <h4>phpMyAdmin</h4>
+                                    <p>Веб-интерфейс для управления MySQL</p>
+                                </div>
+                                <div class="tool-card">
+                                    <h4>HeidiSQL</h4>
+                                    <p>Бесплатная альтернатива для Windows</p>
+                                </div>
+                                <div class="tool-card">
+                                    <h4>Adminer</h4>
+                                    <p>Легковесная альтернатива phpMyAdmin</p>
+                                </div>
+                            </div>
+                        </section>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Базы данных</h4>
+                    <p>Образовательный проект по изучению баз данных в веб-разработке.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Главная</a></li>
+                        <li><a href="sql.html">SQL Базы</a></li>
+                        <li><a href="nosql.html">NoSQL Базы</a></li>
+                        <li><a href="comparison.html">Сравнение</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Базы данных в Web-разработке. Учебный проект.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

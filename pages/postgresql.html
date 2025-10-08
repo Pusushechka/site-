@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostgreSQL - Базы данных в Web-разработке</title>
+    <link rel="stylesheet" href="../css/tent.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <a href="../index.html" class="logo">
+                        <span class="logo-icon">🗃️</span>
+                        <span class="logo-text">Базы данных</span>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="main-nav">
+                    <li class="nav-item"><a href="../index.html" class="nav-link">Главная</a></li>
+                    <li class="nav-item"><a href="sql.html" class="nav-link">SQL</a></li>
+                    <li class="nav-item"><a href="nosql.html" class="nav-link">NoSQL</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li>
+                    <li class="nav-item"><a href="mysql.html" class="nav-link">MySQL</a></li>
+                </ul>
+                
+                <button class="nav-toggle" id="nav-toggle" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="layout">
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">🐘 PostgreSQL</h3>
+                        <ul class="sidebar-nav">
+                            <li><a href="#overview" class="sidebar-link">Обзор</a></li>
+                            <li><a href="#features" class="sidebar-link">Возможности</a></li>
+                            <li><a href="#advanced" class="sidebar-link">Продвинутые функции</a></li>
+                            <li><a href="#examples" class="sidebar-link">Примеры</a></li>
+                            <li><a href="#vs-mysql" class="sidebar-link">PostgreSQL vs MySQL</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">📊 Характеристики</h3>
+                        <div class="stats-card">
+                            <div class="stat-item">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">ACID</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">1996</span>
+                                <span class="stat-label">Год выпуска</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <main class="main-content">
+                    <article class="content-card">
+                        <header class="article-header">
+                            <h1 class="article-title">PostgreSQL 🐘</h1>
+                            <p class="article-subtitle">Продвинутая объектно-реляционная система управления базами данных</p>
+                        </header>
+
+                        <section id="overview" class="content-section">
+                            <h2>🎯 Обзор PostgreSQL</h2>
+                            <p><strong>PostgreSQL</strong> - это мощная, открытая объектно-реляционная система управления базами данных, известная своей надежностью, robust функциональностью и соответствием стандартам SQL.</p>
+                            
+                            <div class="info-card">
+                                <h4>📖 История</h4>
+                                <p>PostgreSQL разрабатывается с 1986 года в Калифорнийском университете в Беркли. Название происходит от "Post-Ingres", так как система является преемником СУБД Ingres.</p>
+                            </div>
+
+                            <div class="key-facts">
+                                <h3>🔑 Ключевые факты:</h3>
+                                <ul>
+                                    <li><strong>Тип:</strong> Объектно-реляционная СУБД</li>
+                                    <li><strong>Лицензия:</strong> PostgreSQL License (свободная)</li>
+                                    <li><strong>Разработка:</strong> Сообщество разработчиков</li>
+                                    <li><strong>Написана на:</strong> C</li>
+                                    <li><strong>Соответствие стандарту:</strong> Полное соответствие SQL:2016</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section id="features" class="content-section">
+                            <h2>⭐ Основные возможности</h2>
+                            
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon">🔧</div>
+                                    <h3>Расширяемость</h3>
+                                    <p>Поддержка пользовательских типов данных, функций и операторов</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🎯</div>
+                                    <h3>Стандарты SQL</h3>
+                                    <p>Наиболее полная поддержка стандартов SQL среди открытых СУБД</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🔄</div>
+                                    <h3>Параллелизм</h3>
+                                    <p>MVCC (Multiversion Concurrency Control) для высокой производительности</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">📦</div>
+                                    <h3>Расширения</h3>
+                                    <p>Богатая экосистема расширений (PostGIS, JSONB, и др.)</p>
+                                </div>
+                            </div>
+
+                            <h3>🎪 Поддерживаемые типы данных:</h3>
+                            <div class="data-types">
+                                <div class="type-category">
+                                    <h4>Базовые типы</h4>
+                                    <ul>
+                                        <li>Числовые: INTEGER, BIGINT, NUMERIC, DECIMAL</li>
+                                        <li>Строковые: VARCHAR, TEXT, CHAR</li>
+                                        <li>Дата/время: TIMESTAMP, DATE, TIME, INTERVAL</li>
+                                        <li>Логические: BOOLEAN</li>
+                                    </ul>
+                                </div>
+                                <div class="type-category">
+                                    <h4>Продвинутые типы</h4>
+                                    <ul>
+                                        <li>Массивы: INTEGER[], TEXT[]</li>
+                                        <li>JSON/JSONB</li>
+                                        <li>Геометрические: POINT, LINE, POLYGON</li>
+                                        <li>Пользовательские типы (CREATE TYPE)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="advanced" class="content-section">
+                            <h2>🚀 Продвинутые функции</h2>
+                            
+                            <div class="advanced-features">
+                                <div class="advanced-feature">
+                                    <h4>🪟 Оконные функции</h4>
+                                    <pre><code>SELECT 
+    name,
+    department,
+    salary,
+    AVG(salary) OVER (PARTITION BY department) as avg_salary
+FROM employees;</code></pre>
+                                </div>
+                                
+                                <div class="advanced-feature">
+                                    <h4>🔍 Полнотекстовый поиск</h4>
+                                    <pre><code>SELECT title, content
+FROM articles
+WHERE to_tsvector('english', content) 
+      @@ to_tsquery('english', 'database & performance');</code></pre>
+                                </div>
+                                
+                                <div class="advanced-feature">
+                                    <h4>🛠️ Общие табличные выражения (CTE)</h4>
+                                    <pre><code>WITH recursive categories AS (
+    SELECT id, name, parent_id
+    FROM category
+    WHERE parent_id IS NULL
+    UNION ALL
+    SELECT c.id, c.name, c.parent_id
+    FROM category c
+    JOIN categories ON c.parent_id = categories.id
+)
+SELECT * FROM categories;</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="examples" class="content-section">
+                            <h2>💻 Практические примеры</h2>
+                            
+                            <h3>Работа с JSONB:</h3>
+                            <pre><code>-- Создание таблицы с JSONB
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    attributes JSONB
+);
+
+-- Вставка JSON данных
+INSERT INTO products (name, attributes) VALUES
+    ('Laptop', '{"brand": "Dell", "ram": 16, "storage": "512GB SSD"}'),
+    ('Phone', '{"brand": "Samsung", "storage": "128GB", "color": "black"}');
+
+-- Запрос по JSON полю
+SELECT name FROM products 
+WHERE attributes->>'brand' = 'Dell';</code></pre>
+
+                            <h3>Использование массивов:</h3>
+                            <pre><code>-- Создание таблицы с массивом
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(200),
+    tags TEXT[]
+);
+
+-- Вставка данных с массивом
+INSERT INTO posts (title, tags) VALUES
+    ('PostgreSQL Guide', '{"database", "sql", "tutorial"}'),
+    ('Web Development', '{"javascript", "nodejs", "react"}');
+
+-- Поиск по массиву
+SELECT title FROM posts WHERE 'sql' = ANY(tags);</code></pre>
+                        </section>
+
+                        <section id="vs-mysql" class="content-section">
+                            <h2>⚔️ PostgreSQL vs MySQL</h2>
+                            
+                            <div class="comparison-table-container">
+                                <table class="comparison-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Характеристика</th>
+                                            <th>PostgreSQL</th>
+                                            <th>MySQL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Тип СУБД</strong></td>
+                                            <td>Объектно-реляционная</td>
+                                            <td>Чисто реляционная</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Стандарты SQL</strong></td>
+                                            <td>Полное соответствие</td>
+                                            <td>Частичное соответствие</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Производительность</strong></td>
+                                            <td>Лучше для сложных запросов</td>
+                                            <td>Лучше для простых операций</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Репликация</strong></td>
+                                            <td>Синхронная и асинхронная</td>
+                                            <td>В основном асинхронная</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Расширяемость</strong></td>
+                                            <td>Очень высокая</td>
+                                            <td>Ограниченная</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Сообщество</strong></td>
+                                            <td>Академическое, enterprise</td>
+                                            <td>Web-разработка</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="recommendation-card">
+                                <h4>🎯 Когда выбрать PostgreSQL?</h4>
+                                <ul>
+                                    <li><strong>Сложные данные:</strong> Геоданные, JSON, массивы</li>
+                                    <li><strong>Строгие требования:</strong> Полное соответствие ACID</li>
+                                    <li><strong>Аналитика:</strong> Сложные запросы и отчеты</li>
+                                    <li><strong>Расширяемость:</strong> Нестандартные типы данных</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section class="content-section">
+                            <h2>🔧 Инструменты для PostgreSQL</h2>
+                            
+                            <div class="tools-grid">
+                                <div class="tool-card">
+                                    <h4>pgAdmin</h4>
+                                    <p>Официальный графический инструмент для администрирования</p>
+                                </div>
+                                <div class="tool-card">
+                                    <h4>DBeaver</h4>
+                                    <p>Универсальный SQL клиент с поддержкой PostgreSQL</p>
+                                </div>
+                                <div class="tool-card">
+                                    <h4>PostGIS</h4>
+                                    <p>Расширение для работы с геопространственными данными</p>
+                                </div>
+                                <div class="tool-card">
+                                    <h4>psql</h4>
+                                    <p>Командная строка PostgreSQL</p>
+                                </div>
+                            </div>
+                        </section>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Базы данных</h4>
+                    <p>Образовательный проект по изучению баз данных в веб-разработке.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Главная</a></li>
+                        <li><a href="sql.html">SQL Базы</a></li>
+                        <li><a href="nosql.html">NoSQL Базы</a></li>
+                        <li><a href="comparison.html">Сравнение</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Базы данных в Web-разработке. Учебный проект.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

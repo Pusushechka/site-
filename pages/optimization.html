@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оптимизация запросов - Базы данных в Web-разработке</title>
+    <link rel="stylesheet" href="../css/tent.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <a href="../index.html" class="logo">
+                        <span class="logo-icon">🗃️</span>
+                        <span class="logo-text">Базы данных</span>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="main-nav">
+                    <li class="nav-item"><a href="../index.html" class="nav-link">Главная</a></li>
+                    <li class="nav-item"><a href="sql.html" class="nav-link">SQL</a></li>
+                    <li class="nav-item"><a href="nosql.html" class="nav-link">NoSQL</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li>
+                    <li class="nav-item"><a href="mysql.html" class="nav-link">MySQL</a></li>
+                </ul>
+                
+                <button class="nav-toggle" id="nav-toggle" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="layout">
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">⚡ Оптимизация</h3>
+                        <ul class="sidebar-nav">
+                            <li><a href="#indexes" class="sidebar-link">Индексы</a></li>
+                            <li><a href="#queries" class="sidebar-link">Оптимизация запросов</a></li>
+                            <li><a href="#structure" class="sidebar-link">Структура БД</a></li>
+                            <li><a href="#monitoring" class="sidebar-link">Мониторинг</a></li>
+                            <li><a href="#caching" class="sidebar-link">Кэширование</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">📊 Метрики</h3>
+                        <div class="stats-card">
+                            <div class="stat-item">
+                                <span class="stat-number">10x</span>
+                                <span class="stat-label">Ускорение с индексами</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">90%</span>
+                                <span class="stat-label">Проблем - плохие запросы</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <main class="main-content">
+                    <article class="content-card">
+                        <header class="article-header">
+                            <h1 class="article-title">Оптимизация запросов ⚡</h1>
+                            <p class="article-subtitle">Техники и стратегии для ускорения работы с базами данных</p>
+                        </header>
+
+                        <section id="indexes" class="content-section">
+                            <h2>📈 Оптимизация с помощью индексов</h2>
+                            <p>Индексы - это одна из самых эффективных техник оптимизации производительности баз данных.</p>
+                            
+                            <div class="info-card">
+                                <h4>🎯 Что такое индекс?</h4>
+                                <p>Индекс - это структура данных, которая ускоряет операции поиска в таблице за счет дополнительных затрат на запись и хранение.</p>
+                            </div>
+
+                            <h3>Типы индексов в SQL:</h3>
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon">🔍</div>
+                                    <h3>B-Tree</h3>
+                                    <p>Стандартный индекс для равенства и диапазонных запросов</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">📝</div>
+                                    <h3>Hash</h3>
+                                    <p>Только для операций равенства, очень быстрый</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🔤</div>
+                                    <h3>Full-Text</h3>
+                                    <p>Для полнотекстового поиска</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">📍</div>
+                                    <h3>Spatial</h3>
+                                    <p>Для геопространственных данных</p>
+                                </div>
+                            </div>
+
+                            <h3>Примеры создания индексов:</h3>
+                            <div class="code-examples">
+                                <div class="code-block">
+                                    <h4>Простой индекс</h4>
+                                    <pre><code>CREATE INDEX idx_users_email ON users(email);</code></pre>
+                                </div>
+                                
+                                <div class="code-block">
+                                    <h4>Составной индекс</h4>
+                                    <pre><code>CREATE INDEX idx_users_name_country 
+ON users(last_name, country);</code></pre>
+                                </div>
+                                
+                                <div class="code-block">
+                                    <h4>Уникальный индекс</h4>
+                                    <pre><code>CREATE UNIQUE INDEX idx_users_username 
+ON users(username);</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="queries" class="content-section">
+                            <h2>💡 Оптимизация SQL запросов</h2>
+                            
+                            <div class="best-practices-list">
+                                <div class="practice-item">
+                                    <h4>✅ Используйте EXPLAIN</h4>
+                                    <p>Анализируйте планы выполнения запросов перед оптимизацией</p>
+                                    <pre><code>EXPLAIN SELECT * FROM users WHERE age > 25;</code></pre>
+                                </div>
+                                
+                                <div class="practice-item">
+                                    <h4>✅ Избегайте SELECT *</h4>
+                                    <p>Выбирайте только нужные столбцы</p>
+                                    <pre><code>-- Плохо
+SELECT * FROM users;
+
+-- Хорошо
+SELECT id, name, email FROM users;</code></pre>
+                                </div>
+                                
+                                <div class="practice-item">
+                                    <h4>✅ Используйте LIMIT</h4>
+                                    <p>Ограничивайте количество возвращаемых строк</p>
+                                    <pre><code>SELECT * FROM products 
+WHERE category = 'electronics'
+LIMIT 10;</code></pre>
+                                </div>
+                                
+                                <div class="practice-item">
+                                    <h4>✅ Оптимизируйте JOIN</h4>
+                                    <p>Используйте INNER JOIN вместо WHERE для соединений</p>
+                                    <pre><code>-- Медленно
+SELECT * FROM users, orders 
+WHERE users.id = orders.user_id;
+
+-- Быстро
+SELECT * FROM users 
+INNER JOIN orders ON users.id = orders.user_id;</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="structure" class="content-section">
+                            <h2>🏗️ Оптимизация структуры БД</h2>
+                            
+                            <div class="optimization-techniques">
+                                <div class="technique">
+                                    <h4>Нормализация</h4>
+                                    <p>Устранение избыточности данных для уменьшения размера БД</p>
+                                    <ul>
+                                        <li>1NF: Атомарность данных</li>
+                                        <li>2NF: Зависимость от первичного ключа</li>
+                                        <li>3NF: Транзитивная независимость</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="technique">
+                                    <h4>Денормализация</h4>
+                                    <p>Сознательное дублирование данных для ускорения чтения</p>
+                                    <pre><code>-- Добавляем вычисляемое поле
+ALTER TABLE orders 
+ADD COLUMN total_amount DECIMAL(10,2) 
+GENERATED ALWAYS AS (quantity * price) STORED;</code></pre>
+                                </div>
+                                
+                                <div class="technique">
+                                    <h4>Партиционирование</h4>
+                                    <p>Разделение больших таблиц на меньшие части</p>
+                                    <pre><code>-- Партиционирование по дате
+CREATE TABLE sales (
+    id SERIAL,
+    sale_date DATE,
+    amount DECIMAL(10,2)
+) PARTITION BY RANGE (sale_date);</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="monitoring" class="content-section">
+                            <h2>📊 Мониторинг производительности</h2>
+                            
+                            <div class="monitoring-tools">
+                                <div class="tool-card">
+                                    <h4>MySQL Slow Query Log</h4>
+                                    <p>Логирование медленных запросов</p>
+                                    <pre><code># В my.cnf
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/slow.log
+long_query_time = 2</code></pre>
+                                </div>
+                                
+                                <div class="tool-card">
+                                    <h4>EXPLAIN ANALYZE</h4>
+                                    <p>Детальный анализ выполнения запроса</p>
+                                    <pre><code>EXPLAIN ANALYZE 
+SELECT * FROM users 
+WHERE email LIKE '%@gmail.com';</code></pre>
+                                </div>
+                                
+                                <div class="tool-card">
+                                    <h4>Performance Schema</h4>
+                                    <p>Мониторинг производительности в реальном времени</p>
+                                    <pre><code>SELECT * FROM performance_schema.events_statements_summary_by_digest 
+ORDER BY SUM_TIMER_WAIT DESC LIMIT 10;</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="caching" class="content-section">
+                            <h2>💾 Стратегии кэширования</h2>
+                            
+                            <div class="caching-strategies">
+                                <div class="strategy">
+                                    <h4>Кэширование запросов</h4>
+                                    <p>Кэширование результатов часто выполняемых запросов</p>
+                                    <pre><code>-- MySQL Query Cache (устаревшее)
+query_cache_type = 1
+query_cache_size = 64M</code></pre>
+                                </div>
+                                
+                                <div class="strategy">
+                                    <h4>Redis для кэширования</h4>
+                                    <p>Использование Redis как кэша приложения</p>
+                                    <pre><code># Python пример
+import redis
+r = redis.Redis()
+
+def get_user(user_id):
+    cache_key = f"user:{user_id}"
+    user_data = r.get(cache_key)
+    if not user_data:
+        user_data = db.query("SELECT * FROM users WHERE id = %s", user_id)
+        r.setex(cache_key, 300, user_data)  # Кэш на 5 минут
+    return user_data</code></pre>
+                                </div>
+                                
+                                <div class="strategy">
+                                    <h4>Materialized Views</h4>
+                                    <p>Предварительно вычисленные представления</p>
+                                    <pre><code>-- PostgreSQL
+CREATE MATERIALIZED VIEW monthly_sales AS
+SELECT 
+    DATE_TRUNC('month', sale_date) as month,
+    SUM(amount) as total_sales
+FROM sales
+GROUP BY DATE_TRUNC('month', sale_date);</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="content-section">
+                            <h2>🎯 Чек-лист оптимизации</h2>
+                            
+                            <div class="checklist">
+                                <div class="checklist-item">
+                                    <input type="checkbox" checked>
+                                    <label>Проанализировать медленные запросы</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Добавить недостающие индексы</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Убрать N+1 запросы</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Оптимизировать структуру БД</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Настроить кэширование</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Реализовать мониторинг</label>
+                                </div>
+                            </div>
+                        </section>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Базы данных</h4>
+                    <p>Образовательный проект по изучению баз данных в веб-разработке.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Главная</a></li>
+                        <li><a href="sql.html">SQL Базы</a></li>
+                        <li><a href="nosql.html">NoSQL Базы</a></li>
+                        <li><a href="comparison.html">Сравнение</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Базы данных в Web-разработке. Учебный проект.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

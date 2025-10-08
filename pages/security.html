@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Безопасность БД - Базы данных в Web-разработке</title>
+    <link rel="stylesheet" href="../css/tent.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <a href="../index.html" class="logo">
+                        <span class="logo-icon">🗃️</span>
+                        <span class="logo-text">Базы данных</span>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="main-nav">
+                    <li class="nav-item"><a href="../index.html" class="nav-link">Главная</a></li>
+                    <li class="nav-item"><a href="sql.html" class="nav-link">SQL</a></li>
+                    <li class="nav-item"><a href="nosql.html" class="nav-link">NoSQL</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li>
+                    <li class="nav-item"><a href="mysql.html" class="nav-link">MySQL</a></li>
+                </ul>
+                
+                <button class="nav-toggle" id="nav-toggle" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="layout">
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">🛡️ Безопасность</h3>
+                        <ul class="sidebar-nav">
+                            <li><a href="#authentication" class="sidebar-link">Аутентификация</a></li>
+                            <li><a href="#authorization" class="sidebar-link">Авторизация</a></li>
+                            <li><a href="#encryption" class="sidebar-link">Шифрование</a></li>
+                            <li><a href="#injection" class="sidebar-link">SQL инъекции</a></li>
+                            <li><a href="#audit" class="sidebar-link">Аудит и мониторинг</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">⚠️ Угрозы</h3>
+                        <div class="features-list">
+                            <div class="feature-tag" style="background: var(--error-color);">SQL Injection</div>
+                            <div class="feature-tag" style="background: var(--warning-color);">XSS</div>
+                            <div class="feature-tag" style="background: var(--accent-color);">Data Leak</div>
+                            <div class="feature-tag" style="background: #8b5cf6;">Privilege Escalation</div>
+                        </div>
+                    </div>
+                </aside>
+
+                <main class="main-content">
+                    <article class="content-card">
+                        <header class="article-header">
+                            <h1 class="article-title">Безопасность баз данных 🛡️</h1>
+                            <p class="article-subtitle">Защита данных от угроз и несанкционированного доступа</p>
+                        </header>
+
+                        <section id="authentication" class="content-section">
+                            <h2>🔐 Аутентификация</h2>
+                            <p>Проверка подлинности пользователей и систем, пытающихся получить доступ к БД.</p>
+                            
+                            <div class="security-measures">
+                                <div class="measure">
+                                    <h4>Сильные пароли</h4>
+                                    <p>Требования к сложности паролей</p>
+                                    <pre><code>-- MySQL password policy
+SET GLOBAL validate_password.length = 8;
+SET GLOBAL validate_password.mixed_case_count = 1;
+SET GLOBAL validate_password.number_count = 1;
+SET GLOBAL validate_password.special_char_count = 1;</code></pre>
+                                </div>
+                                
+                                <div class="measure">
+                                    <h4>Двухфакторная аутентификация</h4>
+                                    <p>Дополнительный уровень безопасности</p>
+                                    <pre><code>-- PostgreSQL + 2FA
+-- Использование внешних систем аутентификации
+-- LDAP, Kerberos, PAM</code></pre>
+                                </div>
+                                
+                                <div class="measure">
+                                    <h4>Ограничение попыток входа</h4>
+                                    <p>Защита от brute-force атак</p>
+                                    <pre><code>-- Fail2ban для MySQL
+# /etc/fail2ban/jail.local
+[mysqld-auth]
+enabled = true
+port = 3306
+logpath = /var/log/mysql/error.log
+maxretry = 3</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="authorization" class="content-section">
+                            <h2>🎫 Авторизация и права доступа</h2>
+                            <p>Принцип наименьших привилегий - предоставлять только необходимые права.</p>
+                            
+                            <div class="authorization-examples">
+                                <div class="example">
+                                    <h4>Создание пользователей с ограниченными правами</h4>
+                                    <pre><code>-- Создание пользователя только для чтения
+CREATE USER 'reader'@'localhost' IDENTIFIED BY 'secure_password';
+GRANT SELECT ON mydatabase.* TO 'reader'@'localhost';
+
+-- Пользователь для веб-приложения
+CREATE USER 'webapp'@'192.168.1.%' IDENTIFIED BY 'app_password';
+GRANT SELECT, INSERT, UPDATE ON mydatabase.* TO 'webapp'@'192.168.1.%';</code></pre>
+                                </div>
+                                
+                                <div class="example">
+                                    <h4>Ролевая модель доступа</h4>
+                                    <pre><code>-- PostgreSQL роли
+CREATE ROLE read_only;
+GRANT CONNECT ON DATABASE mydb TO read_only;
+GRANT USAGE ON SCHEMA public TO read_only;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO read_only;
+
+-- Назначение роли пользователю
+GRANT read_only TO web_user;</code></pre>
+                                </div>
+                            </div>
+
+                            <h3>📋 Матрица прав доступа:</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Роль</th>
+                                        <th>SELECT</th>
+                                        <th>INSERT</th>
+                                        <th>UPDATE</th>
+                                        <th>DELETE</th>
+                                        <th>CREATE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Администратор</td>
+                                        <td>✅</td>
+                                        <td>✅</td>
+                                        <td>✅</td>
+                                        <td>✅</td>
+                                        <td>✅</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Веб-приложение</td>
+                                        <td>✅</td>
+                                        <td>✅</td>
+                                        <td>✅</td>
+                                        <td>❌</td>
+                                        <td>❌</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Аналитик</td>
+                                        <td>✅</td>
+                                        <td>❌</td>
+                                        <td>❌</td>
+                                        <td>❌</td>
+                                        <td>❌</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Репорта</td>
+                                        <td>✅</td>
+                                        <td>❌</td>
+                                        <td>❌</td>
+                                        <td>❌</td>
+                                        <td>❌</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+
+                        <section id="encryption" class="content-section">
+                            <h2>🔒 Шифрование данных</h2>
+                            
+                            <div class="encryption-types">
+                                <div class="encryption-type">
+                                    <h4>Шифрование на rest</h4>
+                                    <p>Шифрование данных на диске</p>
+                                    <pre><code>-- MySQL Data-at-Rest Encryption
+INSTALL PLUGIN keyring_file SONAME 'keyring_file.so';
+SET GLOBAL keyring_file_data = '/path/to/keyring';
+
+ALTER TABLE users ENCRYPTION='Y';</code></pre>
+                                </div>
+                                
+                                <div class="encryption-type">
+                                    <h4>Шифрование на transit</h4>
+                                    <p>Шифрование передачи данных</p>
+                                    <pre><code># MySQL SSL конфигурация
+[mysqld]
+ssl-ca=/path/to/ca.pem
+ssl-cert=/path/to/server-cert.pem
+ssl-key=/path/to/server-key.pem
+
+# Подключение с SSL
+mysql --ssl-ca=ca.pem --ssl-cert=client-cert.pem --ssl-key=client-key.pem</code></pre>
+                                </div>
+                                
+                                <div class="encryption-type">
+                                    <h4>Шифрование на уровне приложения</h4>
+                                    <p>Шифрование отдельных полей</p>
+                                    <pre><code>-- Шифрование email в PostgreSQL
+CREATE EXTENSION pgcrypto;
+
+INSERT INTO users (email) 
+VALUES (pgp_sym_encrypt('user@example.com', 'encryption_key'));
+
+SELECT pgp_sym_decrypt(email, 'encryption_key') FROM users;</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="injection" class="content-section">
+                            <h2>🚫 Защита от SQL инъекций</h2>
+                            
+                            <div class="injection-protection">
+                                <div class="protection-method">
+                                    <h4>Подготовленные выражения (Prepared Statements)</h4>
+                                    <p>Использование параметризованных запросов</p>
+                                    <pre><code>// PHP PDO пример
+$stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+$stmt->execute(['email' => $email]);
+$user = $stmt->fetch();
+
+// Python пример
+cursor.execute("SELECT * FROM users WHERE email = %s", (email,))</code></pre>
+                                </div>
+                                
+                                <div class="protection-method">
+                                    <h4>ORM системы</h4>
+                                    <p>Использование Object-Relational Mapping</p>
+                                    <pre><code>// Django ORM
+User.objects.filter(email=email)
+
+// SQLAlchemy
+session.query(User).filter(User.email == email).all()</code></pre>
+                                </div>
+                                
+                                <div class="protection-method">
+                                    <h4>Валидация входных данных</h4>
+                                    <p>Проверка и санитизация пользовательского ввода</p>
+                                    <pre><code>// JavaScript валидация
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// Удаление опасных символов
+function sanitizeInput(input) {
+    return input.replace(/[;'"\\]/g, '');
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <div class="info-card warning">
+                                <h4>⚠️ Пример уязвимого кода</h4>
+                                <pre><code>// НИКОГДА ТАК НЕ ДЕЛАЙТЕ!
+$query = "SELECT * FROM users WHERE email = '" . $_POST['email'] . "'";
+$result = mysql_query($query);</code></pre>
+                                <p>Это позволяет злоумышленнику выполнить произвольный SQL код!</p>
+                            </div>
+                        </section>
+
+                        <section id="audit" class="content-section">
+                            <h2>📊 Аудит и мониторинг</h2>
+                            
+                            <div class="audit-techniques">
+                                <div class="audit-technique">
+                                    <h4>Логирование запросов</h4>
+                                    <pre><code>-- MySQL general log
+SET GLOBAL general_log = 1;
+SET GLOBAL log_output = 'TABLE';
+
+-- PostgreSQL log
+log_statement = 'all'
+log_line_prefix = '%t %u %d %p '</code></pre>
+                                </div>
+                                
+                                <div class="audit-technique">
+                                    <h4>Мониторинг подозрительной активности</h4>
+                                    <pre><code>-- Поиск множественных неудачных попыток входа
+SELECT user, host, count(*) as failed_attempts
+FROM mysql.general_log 
+WHERE argument LIKE '%connect%' AND argument LIKE '%denied%'
+GROUP BY user, host
+HAVING count(*) > 5;</code></pre>
+                                </div>
+                                
+                                <div class="audit-technique">
+                                    <h4>Аудит изменений схемы</h4>
+                                    <pre><code>-- Триггер для аудита изменений
+CREATE TABLE schema_audit (
+    id SERIAL PRIMARY KEY,
+    change_time TIMESTAMP,
+    user_name TEXT,
+    object_type TEXT,
+    object_name TEXT,
+    action TEXT
+);</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="content-section">
+                            <h2>🛡️ Чек-лист безопасности</h2>
+                            
+                            <div class="security-checklist">
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Использовать подготовленные выражения</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Реализовать принцип наименьших привилегий</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Шифровать чувствительные данные</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Регулярно обновлять СУБД</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Настроить бэкапы и восстановление</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Вести аудит и мониторинг</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox">
+                                    <label>Проводить пентест безопасности</label>
+                                </div>
+                            </div>
+                        </section>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Базы данных</h4>
+                    <p>Образовательный проект по изучению баз данных в веб-разработке.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Главная</a></li>
+                        <li><a href="sql.html">SQL Базы</a></li>
+                        <li><a href="nosql.html">NoSQL Базы</a></li>
+                        <li><a href="comparison.html">Сравнение</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Базы данных в Web-разработке. Учебный проект.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

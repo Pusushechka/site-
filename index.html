@@ -1,43 +1,226 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <!-- Мета-теги, заголовок, подключение стилей -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Базы данных в Web-разработке</title>
+    <link rel="stylesheet" href="css/tent.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <a href="/" class="logo">Название сайта</a>
-        <nav>
-            <!-- Горизонтальное меню, превращающееся в бургер на мобильных -->
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html">О нас</a></li>
-                <li><a href="contact.html">Контакты</a></li>
-            </ul>
-        </nav>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">🗃️</span>
+                        <span class="logo-text">Базы данных</span>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="main-nav">
+                    <li class="nav-item"><a href="index.html" class="nav-link active">Главная</a></li>
+                    <li class="nav-item"><a href="pages/sql.html" class="nav-link">SQL</a></li>
+                    <li class="nav-item"><a href="pages/nosql.html" class="nav-link">NoSQL</a></li>
+                    <li class="nav-item"><a href="pages/comparison.html" class="nav-link">Сравнение</a></li>
+                    <li class="nav-item"><a href="pages/mysql.html" class="nav-link">MySQL</a></li>
+                </ul>
+                
+                <button class="nav-toggle" id="nav-toggle" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
     </header>
 
-    <div class="container"> <!-- Контейнер из фреймворка -->
-        <main>
-            <!-- Основной контент страницы -->
-        </main>
-        <aside>
-            <!-- Сайдбар: например, форма подписки, список категорий, баннер -->
-            <h3>Подпишитесь на обновления</h3>
-            <form>
-                <input type="email" placeholder="Ваш email">
-                <button type="submit">Подписаться</button>
-            </form>
-        </aside>
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="container">
+            <div class="layout">
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">📚 Навигация</h3>
+                        <ul class="sidebar-nav">
+                            <li><a href="pages/mysql.html" class="sidebar-link">
+                                <span class="link-icon">🐬</span>
+                                MySQL
+                            </a></li>
+                            <li><a href="pages/postgresql.html" class="sidebar-link">
+                                <span class="link-icon">🐘</span>
+                                PostgreSQL
+                            </a></li>
+                            <li><a href="pages/mongodb.html" class="sidebar-link">
+                                <span class="link-icon">🍃</span>
+                                MongoDB
+                            </a></li>
+                            <li><a href="pages/redis.html" class="sidebar-link">
+                                <span class="link-icon">🔴</span>
+                                Redis
+                            </a></li>
+                            <li><a href="pages/optimization.html" class="sidebar-link">
+                                <span class="link-icon">⚡</span>
+                                Оптимизация
+                            </a></li>
+                            <li><a href="pages/security.html" class="sidebar-link">
+                                <span class="link-icon">🛡️</span>
+                                Безопасность
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">🔥 Популярное</h3>
+                        <div class="popular-posts">
+                            <a href="pages/comparison.html" class="popular-post">
+                                <span class="post-badge">Топ</span>
+                                SQL vs NoSQL: полное сравнение
+                            </a>
+                            <a href="pages/optimization.html" class="popular-post">
+                                <span class="post-badge">Новое</span>
+                                10 способов ускорить запросы
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">📧 Рассылка</h3>
+                        <div class="newsletter">
+                            <p>Подпишитесь на обновления по базам данных</p>
+                            <form class="subscribe-form">
+                                <input type="email" placeholder="Ваш email" class="form-input" required>
+                                <button type="submit" class="btn btn-primary btn-block">Подписаться</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="stats-card">
+                            <h4>Статистика</h4>
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-number">8+</span>
+                                    <span class="stat-label">Тем</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">50+</span>
+                                    <span class="stat-label">Примеров</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">10+</span>
+                                    <span class="stat-label">СУБД</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <main class="main-content">
+                    <article class="content-card">
+                        <header class="article-header">
+                            <h1 class="article-title">Добро пожаловать в мир баз данных! 🗄️</h1>
+                            <p class="article-subtitle">Изучите SQL, NoSQL и современные подходы к хранению данных</p>
+                        </header>
+
+                        <section class="content-section">
+                            <h2>🎯 О чем этот сайт?</h2>
+                            <p>Этот образовательный проект посвящен глубокому изучению баз данных в контексте веб-разработки. Здесь вы найдете актуальную информацию о различных типах СУБД, их особенностях и практическом применении.</p>
+                            
+                            <div class="features-grid">
+                                <div class="feature-card">
+                                    <div class="feature-icon">📊</div>
+                                    <h3>Реляционные БД</h3>
+                                    <p>Изучите классические SQL базы данных: MySQL, PostgreSQL</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🚀</div>
+                                    <h3>NoSQL решения</h3>
+                                    <p>Познакомьтесь с современными нереляционными подходами</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">⚡</div>
+                                    <h3>Оптимизация</h3>
+                                    <p>Узнайте как ускорить работу ваших запросов</p>
+                                </div>
+                                <div class="feature-card">
+                                    <div class="feature-icon">🛡️</div>
+                                    <h3>Безопасность</h3>
+                                    <p>Защитите ваши данные от угроз и атак</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="content-section">
+                            <h2>🚀 Быстрый старт</h2>
+                            <div class="action-cards">
+                                <div class="action-card primary">
+                                    <h3>SQL Базы данных</h3>
+                                    <p>Изучите классические реляционные системы управления базами данных с мощной системой типов и транзакций.</p>
+                                    <a href="pages/sql.html" class="btn btn-light">Изучить SQL →</a>
+                                </div>
+                                <div class="action-card secondary">
+                                    <h3>NoSQL Базы данных</h3>
+                                    <p>Познакомьтесь с современными нереляционными подходами для масштабируемых приложений.</p>
+                                    <a href="pages/nosql.html" class="btn btn-light">Изучить NoSQL →</a>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="content-section">
+                            <h2>📺 Видео-введение</h2>
+                            <div class="video-container">                          
+                             <iframe
+                                    width="720"
+                                    height="405"
+                                    src="https://rutube.ru/play/embed/2da24877d7af78e28606c2bb59396a6d"
+                                    style="border: none;"
+                                    allow="clipboard-write; autoplay"
+                                    allowFullScreen
+                            ></iframe>
+                            </div>
+                        </section>
+                    </article>
+                </main>
+            </div>
+        </div>
     </div>
 
-    <footer>
-        <p>&copy; 2023 Название сайта. Все права защищены.</p>
-        <nav>
-            <a href="#">Политика конфиденциальности</a>
-            <a href="contact.html">Контакты</a>
-        </nav>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Базы данных</h4>
+                    <p>Образовательный проект по изучению баз данных в веб-разработке.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="pages/sql.html">SQL Базы</a></li>
+                        <li><a href="pages/nosql.html">NoSQL Базы</a></li>
+                        <li><a href="pages/comparison.html">Сравнение</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@example.com">Email</a></li>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Документация</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Базы данных в Web-разработке. Учебный проект.</p>
+            </div>
+        </div>
     </footer>
 
-    <!-- Подключение скриптов -->
+    <script src="js/script.js"></script>
 </body>
 </html>

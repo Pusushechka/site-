@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoSQL Базы данных - Базы данных в Web-разработке</title>
+    <link rel="stylesheet" href="../css/tent.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <a href="../index.html" class="logo">
+                        <span class="logo-icon">🗃️</span>
+                        <span class="logo-text">Базы данных</span>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="main-nav">
+                    <li class="nav-item"><a href="../index.html" class="nav-link">Главная</a></li>
+                    <li class="nav-item"><a href="sql.html" class="nav-link">SQL</a></li>
+                    <li class="nav-item"><a href="nosql.html" class="nav-link active">NoSQL</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li>
+                    <li class="nav-item"><a href="mysql.html" class="nav-link">MySQL</a></li>
+                </ul>
+                
+                <button class="nav-toggle" id="nav-toggle" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="layout">
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">📚 Типы NoSQL</h3>
+                        <ul class="sidebar-nav">
+                            <li><a href="#document" class="sidebar-link">
+                                <span class="link-icon">📄</span>
+                                Документные
+                            </a></li>
+                            <li><a href="#key-value" class="sidebar-link">
+                                <span class="link-icon">🔑</span>
+                                Ключ-Значение
+                            </a></li>
+                            <li><a href="#column" class="sidebar-link">
+                                <span class="link-icon">📊</span>
+                                Колоночные
+                            </a></li>
+                            <li><a href="#graph" class="sidebar-link">
+                                <span class="link-icon">🕸️</span>
+                                Графовые
+                            </a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">🚀 Популярные NoSQL БД</h3>
+                        <ul class="sidebar-nav">
+                            <li><a href="mongodb.html" class="sidebar-link">MongoDB</a></li>
+                            <li><a href="redis.html" class="sidebar-link">Redis</a></li>
+                            <li><a href="#" class="sidebar-link">Cassandra</a></li>
+                            <li><a href="#" class="sidebar-link">Neo4j</a></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <main class="main-content">
+                    <article class="content-card">
+                        <header class="article-header">
+                            <h1 class="article-title">NoSQL Базы данных 🚀</h1>
+                            <p class="article-subtitle">Современные нереляционные подходы к хранению данных</p>
+                        </header>
+
+                        <section class="content-section">
+                            <h2>🎯 Что такое NoSQL?</h2>
+                            <p><strong>NoSQL (Not Only SQL)</strong> - это подход к проектированию баз данных, который отличается от традиционных реляционных систем. NoSQL базы данных предназначены для работы с большими объемами неструктурированных данных.</p>
+                            
+                            <div class="info-card warning">
+                                <h4>💡 Важно</h4>
+                                <p>NoSQL не означает полный отказ от SQL. Многие NoSQL базы данных поддерживают SQL-подобные запросы, но с другими принципами хранения данных.</p>
+                            </div>
+                        </section>
+
+                        <section id="document" class="content-section">
+                            <h2>📄 Документные базы данных</h2>
+                            <p>Хранят данные в виде документов (обычно JSON, BSON, XML). Каждый документ может иметь свою собственную структуру.</p>
+                            
+                            <div class="code-example">
+                                <h4>Пример документа в MongoDB:</h4>
+                                <pre><code>{
+    "_id": "507f1f77bcf86cd799439011",
+    "username": "john_doe",
+    "email": "john@example.com",
+    "profile": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "age": 30
+    },
+    "hobbies": ["reading", "cycling", "photography"]
+}</code></pre>
+                            </div>
+                            
+                            <h4>Преимущества:</h4>
+                            <ul>
+                                <li>Гибкая схема данных</li>
+                                <li>Простота масштабирования</li>
+                                <li>Быстрые операции чтения/записи</li>
+                                <li>Подходит для контент-менеджмент систем</li>
+                            </ul>
+                        </section>
+
+                        <section id="key-value" class="content-section">
+                            <h2>🔑 Базы данных типа Ключ-Значение</h2>
+                            <p>Простейший тип NoSQL баз, где каждый элемент хранится как пара ключ-значение.</p>
+                            
+                            <div class="example-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Ключ</th>
+                                            <th>Значение</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>user:1001:name</td>
+                                            <td>"Анна Иванова"</td>
+                                        </tr>
+                                        <tr>
+                                            <td>user:1001:email</td>
+                                            <td>"anna@mail.com"</td>
+                                        </tr>
+                                        <tr>
+                                            <td>session:abc123</td>
+                                            <td>{"user_id": 1001, "expires": "2024-12-31"}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <h4>Использование:</h4>
+                            <ul>
+                                <li>Кэширование</li>
+                                <li>Сессии пользователей</li>
+                                <li>Счетчики и рейтинги</li>
+                                <li>Очереди сообщений</li>
+                            </ul>
+                        </section>
+
+                        <section id="column" class="content-section">
+                            <h2>📊 Колоночные базы данных</h2>
+                            <p>Хранят данные по столбцам, а не по строкам, что оптимизировано для аналитических запросов.</p>
+                            
+                            <div class="comparison">
+                                <div class="comparison-item">
+                                    <h5>Реляционный подход (по строкам)</h5>
+                                    <pre><code>| ID | Name | Age | City |
+|----|------|-----|------|
+| 1  | John | 25  | NY   |
+| 2  | Jane | 30  | LA   |</code></pre>
+                                </div>
+                                <div class="comparison-item">
+                                    <h5>Колоночный подход</h5>
+                                    <pre><code>ID:    [1, 2]
+Name:  ["John", "Jane"]  
+Age:   [25, 30]
+City:  ["NY", "LA"]</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="graph" class="content-section">
+                            <h2>🕸️ Графовые базы данных</h2>
+                            <p>Специализируются на хранении и обработке связей между данными. Состоят из узлов, связей и свойств.</p>
+                            
+                            <div class="graph-example">
+                                <h4>Пример социальной сети:</h4>
+                                <pre><code>(User:Alice)-[FRIENDS_WITH]->(User:Bob)
+(User:Alice)-[LIKES]->(Post:123)
+(User:Bob)-[FOLLOWS]->(User:Charlie)</code></pre>
+                            </div>
+                            
+                            <h4>Применение:</h4>
+                            <ul>
+                                <li>Социальные сети</li>
+                                <li>Рекомендательные системы</li>
+                                <li>Обнаружение мошенничества</li>
+                                <li>Сетевые топологии</li>
+                            </ul>
+                        </section>
+
+                        <section class="content-section">
+                            <h2>📈 Когда использовать NoSQL?</h2>
+                            <div class="use-cases">
+                                <div class="use-case">
+                                    <h4>✅ Используйте NoSQL когда:</h4>
+                                    <ul>
+                                        <li>Большие объемы неструктурированных данных</li>
+                                        <li>Требуется горизонтальное масштабирование</li>
+                                        <li>Быстрая разработка и частые изменения схемы</li>
+                                        <li>Высокие требования к производительности записи</li>
+                                    </ul>
+                                </div>
+                                <div class="use-case">
+                                    <h4>❌ Избегайте NoSQL когда:</h4>
+                                    <ul>
+                                        <li>Требуются сложные JOIN операции</li>
+                                        <li>Строгие требования ACID</li>
+                                        <li>Сложные транзакции между таблицами</li>
+                                        <li>Устоявшаяся, редко меняющаяся схема</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Базы данных</h4>
+                    <p>Образовательный проект по изучению баз данных в веб-разработке.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Главная</a></li>
+                        <li><a href="sql.html">SQL Базы</a></li>
+                        <li><a href="nosql.html">NoSQL Базы</a></li>
+                        <li><a href="comparison.html">Сравнение</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Базы данных в Web-разработке. Учебный проект.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB - Базы данных в Web-разработке</title>
+    <link rel="stylesheet" href="../css/tent.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <a href="../index.html" class="logo">
+                        <span class="logo-icon">🗃️</span>
+                        <span class="logo-text">Базы данных</span>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="main-nav">
+                    <li class="nav-item"><a href="../index.html" class="nav-link">Главная</a></li>
+                    <li class="nav-item"><a href="sql.html" class="nav-link">SQL</a></li>
+                    <li class="nav-item"><a href="nosql.html" class="nav-link">NoSQL</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li>
+                    <li class="nav-item"><a href="mysql.html" class="nav-link">MySQL</a></li>
+                </ul>
+                
+                <button class="nav-toggle" id="nav-toggle" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="layout">
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">🍃 MongoDB</h3>
+                        <ul class="sidebar-nav">
+                            <li><a href="#overview" class="sidebar-link">Обзор</a></li>
+                            <li><a href="#concepts" class="sidebar-link">Основные концепции</a></li>
+                            <li><a href="#crud" class="sidebar-link">CRUD операции</a></li>
+                            <li><a href="#aggregation" class="sidebar-link">Агрегации</a></li>
+                            <li><a href="#indexes" class="sidebar-link">Индексы</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3 class="sidebar-title">🚀 Особенности</h3>
+                        <div class="features-list">
+                            <div class="feature-tag">Документная</div>
+                            <div class="feature-tag">JSON-like</div>
+                            <div class="feature-tag">Горизонтальное масштабирование</div>
+                            <div class="feature-tag">Гибкая схема</div>
+                        </div>
+                    </div>
+                </aside>
+
+                <main class="main-content">
+                    <article class="content-card">
+                        <header class="article-header">
+                            <h1 class="article-title">MongoDB 🍃</h1>
+                            <p class="article-subtitle">Самая популярная документо-ориентированная NoSQL база данных</p>
+                        </header>
+
+                        <section id="overview" class="content-section">
+                            <h2>🎯 Обзор MongoDB</h2>
+                            <p><strong>MongoDB</strong> - это документо-ориентированная NoSQL база данных, которая хранит данные в формате, похожем на JSON. Она разработана для масштабирования и гибкости разработки.</p>
+                            
+                            <div class="info-card">
+                                <h4>📖 История</h4>
+                                <p>MongoDB была создана в 2007 году компанией 10gen (ныне MongoDB Inc.). Первый публичный релиз состоялся в 2009 году. Название происходит от слова "humongous" (огромный).</p>
+                            </div>
+
+                            <div class="key-facts">
+                                <h3>🔑 Ключевые факты:</h3>
+                                <ul>
+                                    <li><strong>Тип:</strong> Документо-ориентированная NoSQL</li>
+                                    <li><strong>Лицензия:</strong> SSPL (Server Side Public License)</li>
+                                    <li><strong>Разработчик:</strong> MongoDB Inc.</li>
+                                    <li><strong>Формат данных:</strong> BSON (Binary JSON)</li>
+                                    <li><strong>Язык запросов:</strong> MongoDB Query Language</li>
+                                </ul>
+                            </div>
+                        </section>
+
+                        <section id="concepts" class="content-section">
+                            <h2>📚 Основные концепции</h2>
+                            
+                            <div class="concepts-comparison">
+                                <div class="concept-item">
+                                    <h4>🗄️ SQL термины</h4>
+                                    <ul>
+                                        <li>База данных</li>
+                                        <li>Таблица</li>
+                                        <li>Строка</li>
+                                        <li>Столбец</li>
+                                    </ul>
+                                </div>
+                                <div class="concept-item">
+                                    <h4>🍃 MongoDB термины</h4>
+                                    <ul>
+                                        <li>База данных</li>
+                                        <li>Коллекция</li>
+                                        <li>Документ</li>
+                                        <li>Поле</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>📄 Структура документа:</h3>
+                            <pre><code>{
+    "_id": ObjectId("507f1f77bcf86cd799439011"),
+    "username": "john_doe",
+    "email": "john@example.com",
+    "age": 30,
+    "address": {
+        "street": "123 Main St",
+        "city": "New York",
+        "zip": "10001"
+    },
+    "hobbies": ["reading", "cycling", "photography"],
+    "created_at": ISODate("2024-01-15T10:30:00Z")
+}</code></pre>
+                        </section>
+
+                        <section id="crud" class="content-section">
+                            <h2>💾 CRUD операции</h2>
+                            
+                            <div class="crud-operations">
+                                <div class="crud-operation">
+                                    <h4>📥 CREATE - Вставка</h4>
+                                    <pre><code>// Вставка одного документа
+db.users.insertOne({
+    name: "Alice",
+    email: "alice@example.com",
+    age: 25
+});
+
+// Вставка нескольких документов
+db.users.insertMany([
+    {name: "Bob", email: "bob@example.com", age: 30},
+    {name: "Charlie", email: "charlie@example.com", age: 35}
+]);</code></pre>
+                                </div>
+                                
+                                <div class="crud-operation">
+                                    <h4>📤 READ - Чтение</h4>
+                                    <pre><code>// Найти все документы
+db.users.find();
+
+// Найти с условием
+db.users.find({age: {$gt: 25}});
+
+// Найти один документ
+db.users.findOne({name: "Alice"});
+
+// Проекция (выбор полей)
+db.users.find({}, {name: 1, email: 1});</code></pre>
+                                </div>
+                                
+                                <div class="crud-operation">
+                                    <h4>🔄 UPDATE - Обновление</h4>
+                                    <pre><code>// Обновить один документ
+db.users.updateOne(
+    {name: "Alice"},
+    {$set: {age: 26}}
+);
+
+// Обновить несколько документов
+db.users.updateMany(
+    {age: {$lt: 30}},
+    {$set: {category: "young"}}
+);</code></pre>
+                                </div>
+                                
+                                <div class="crud-operation">
+                                    <h4>🗑️ DELETE - Удаление</h4>
+                                    <pre><code>// Удалить один документ
+db.users.deleteOne({name: "Bob"});
+
+// Удалить несколько документов
+db.users.deleteMany({age: {$gt: 40}});</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="aggregation" class="content-section">
+                            <h2>📊 Агрегации</h2>
+                            <p>Агрегационный pipeline позволяет выполнять сложные операции преобразования и анализа данных.</p>
+                            
+                            <div class="aggregation-example">
+                                <h4>Пример агрегации:</h4>
+                                <pre><code>db.orders.aggregate([
+    // Этап 1: Фильтрация по дате
+    {
+        $match: {
+            order_date: {
+                $gte: ISODate("2024-01-01"),
+                $lt: ISODate("2024-02-01")
+            }
+        }
+    },
+    // Этап 2: Группировка по пользователю
+    {
+        $group: {
+            _id: "$user_id",
+            total_amount: {$sum: "$amount"},
+            average_amount: {$avg: "$amount"},
+            order_count: {$sum: 1}
+        }
+    },
+    // Этап 3: Сортировка по сумме
+    {
+        $sort: {total_amount: -1}
+    },
+    // Этап 4: Ограничение результатов
+    {
+        $limit: 10
+    }
+]);</code></pre>
+                            </div>
+                        </section>
+
+                        <section id="indexes" class="content-section">
+                            <h2>📈 Индексы в MongoDB</h2>
+                            
+                            <div class="index-types">
+                                <div class="index-type">
+                                    <h4>🔍 Одно поле</h4>
+                                    <pre><code>// Создание индекса по одному полю
+db.users.createIndex({email: 1});</code></pre>
+                                </div>
+                                
+                                <div class="index-type">
+                                    <h4>🎯 Составной индекс</h4>
+                                    <pre><code>// Составной индекс по нескольким полям
+db.users.createIndex({age: 1, city: 1});</code></pre>
+                                </div>
+                                
+                                <div class="index-type">
+                                    <h4>🔤 Текстовый индекс</h4>
+                                    <pre><code>// Полнотекстовый поиск
+db.articles.createIndex({content: "text"});</code></pre>
+                                </div>
+                                
+                                <div class="index-type">
+                                    <h4>📍 Геопространственный индекс</h4>
+                                    <pre><code>// Для поиска по地理位置
+db.places.createIndex({location: "2dsphere"});</code></pre>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="content-section">
+                            <h2>🎯 Когда использовать MongoDB?</h2>
+                            
+                            <div class="use-cases">
+                                <div class="use-case">
+                                    <h4>✅ Идеально для:</h4>
+                                    <ul>
+                                        <li>Контент-менеджмент систем</li>
+                                        <li>Социальных сетей</li>
+                                        <li>Каталогов продуктов</li>
+                                        <li>Систем с часто меняющейся схемой</li>
+                                        <li>Приложений с большими объемами данных</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="use-case">
+                                    <h4>❌ Не рекомендуется для:</h4>
+                                    <ul>
+                                        <li>Сложных транзакций между коллекциями</li>
+                                        <li>Систем с жесткими требованиями ACID</li>
+                                        <li>Приложений со сложными JOIN операциями</li>
+                                        <li>Систем с предсказуемой, стабильной схемой</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Базы данных</h4>
+                    <p>Образовательный проект по изучению баз данных в веб-разработке.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Главная</a></li>
+                        <li><a href="sql.html">SQL Базы</a></li>
+                        <li><a href="nosql.html">NoSQL Базы</a></li>
+                        <li><a href="comparison.html">Сравнение</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Базы данных в Web-разработке. Учебный проект.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
