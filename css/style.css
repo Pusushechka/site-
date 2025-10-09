@@ -28,7 +28,9 @@
     --border-radius-lg: 12px;
     --border-radius-xl: 16px;
     
-    --sidebar-width: 300px;
+    --sidebar-width: 320px;  /* Фиксированная ширина, в 3 раза меньше */
+    --sidebar-min-width: 320px;  /* Чтобы не сжималась */
+
     --header-height: 70px;
 }
 
@@ -48,7 +50,7 @@ body {
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 2000px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -159,78 +161,85 @@ body {
 }
 
 /* ===== SIDEBAR ===== */
-.sidebar-toggle {
-    display: none; /* Скрыто на десктопах */
-    flex-direction: column;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    gap: 4px;
-}
-
-.sidebar-toggle span {
-    width: 25px;
-    height: 3px;
-    background: var(--text-primary);
-    transition: 0.3s;
-    border-radius: 2px;
-}
-
-.sidebar-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.sidebar-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.sidebar-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
-/* Анимация для sidebar */
 .sidebar {
-    transition: transform 0.3s ease-in-out; /* Добавляем переход для анимации */
+    background: var(--bg-primary); /* Или градиент: linear-gradient(180deg, #f8fafc, #ffffff); */
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm); /* Мягкая тень */
+    border: none; /* Убрать бордер */
+    overflow-y: auto; /* Вернуть скролл, но с кастомным стилем */
+    scrollbar-width: thin; /* Тонкий скролл в Firefox */
+    scrollbar-color: var(--primary-color) var(--bg-tertiary);
 }
 
-/* Мобильные стили */
-@media (max-width: 768px) {
-    .sidebar-toggle {
-        display: flex; /* Показываем кнопку на мобильных */
-    }
-    
-    .sidebar {
-        position: fixed; /* Фиксируем для выдвижения */
-        top: 0;
-        left: 0;
-        width: 80%; /* Ширина панели на мобильных */
-        height: 100vh; /* Полная высота экрана */
-        transform: translateX(-100%); /* Скрыто слева по умолчанию */
-        z-index: 999; /* Над другими элементами */
-        overflow-y: auto; /* Прокрутка, если контент длинный */
-        max-height: none; /* Убираем ограничение высоты */
-    }
-    
-    .sidebar.active {
-        transform: translateX(0); /* Выдвигается при активации */
-    }
-    
-    /* Затемнение фона при открытом sidebar (опционально) */
-    body.sidebar-open {
-        overflow: hidden; /* Блокируем прокрутку страницы */
-    }
-    
-    body.sidebar-open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5); /* Полупрозрачный оверлей */
-        z-index: 998;
-    }
+.sidebar::-webkit-scrollbar {
+    width: 6px; /* Тонкий скролл в Chrome */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+.sidebar {
+    position: sticky;  /* Делает сайдбар прилипающим */
+    top: var(--header-height);  /* Отступ от верха, чтобы не перекрывать хедер */
+    align-self: flex-start;  /* Выравнивание в flex-лейауте */
+    height: calc(100vh - var(--header-height));  /* Высота на весь экран минус хедер */
+    overflow-y: auto;  /* Скролл внутри сайдбара, если контент длинный */
+    z-index: 10;  /* Чтобы был выше основного контента */
+}
+
+.layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;  
+}
+
+.sidebar-section {
+    margin-bottom: 2rem; 
+}
+
+.sidebar-section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-min-width);
+    max-width: var(--sidebar-width); 
+}
+
+/* Ссылки в навигации */
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* Пространство между иконкой и текстом */
+    padding: 0.5rem 0;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s, padding-left 0.3s;
+}
+
+.sidebar-nav a:hover {
+    color: var(--primary-color);
+    padding-left: 0.5rem; /* Лёгкий сдвиг для анимации */
+}
+
+/* Статистика в карточках */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Уже есть, но убедитесь */
+    gap: 1rem;
+}
+
+.stat-item {
+    background: var(--bg-tertiary);
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    text-align: center;
 }
 
 /* Popular Posts */
@@ -1003,19 +1012,11 @@ th {
     }
     
     .sidebar {
-        width: var(--sidebar-width);
-        flex-shrink: 0;
-        position: sticky;
-        top: calc(var(--header-height) + 2rem);
-        background: var(--bg-card);
-        border-radius: var(--border-radius-lg);
-        padding: 1.5rem;
-        box-shadow: var(--shadow-md);
-        border: 1px solid var(--border-color);
-        max-height: calc(100vh - var(--header-height) - 4rem);
-        overflow-y: scroll; /* Изменено на scroll для плавной прокрутки без видимой полосы */
-        -ms-overflow-style: none; /* Скрытие полосы в IE/Edge */
-        scrollbar-width: none; /* Скрытие полосы в Firefox */
+        width: var(--sidebar-min-width);
+        left: -var(--sidebar-min-width);  /* Смещение для slide-out */
+    }
+    .sidebar.active {
+        left: 0;
     }
 
     .sidebar::-webkit-scrollbar {
