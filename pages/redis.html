@@ -22,7 +22,7 @@
                     <li class="nav-item"><a href="../index.html" class="nav-link">Главная</a></li>
                     <li class="nav-item"><a href="sql.html" class="nav-link">SQL</a></li>
                     <li class="nav-item"><a href="nosql.html" class="nav-link">NoSQL</a></li>
-                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение SQL и NoSQL</a></li>
                     <li class="nav-item"><a href="mysql.html" class="nav-link">MySQL</a></li>
                 </ul>
                 
@@ -97,40 +97,40 @@
                                     <h4>🔤 Strings</h4>
                                     <p>Бинарно-безопасные строки до 512MB</p>
                                     <pre><code>SET user:1000 "John Doe"
-GET user:1000
-INCR counter:page_views</code></pre>
+                                        GET user:1000
+                                        INCR counter:page_views</code></pre>
                                 </div>
                                 
                                 <div class="data-type-card">
                                     <h4>📋 Lists</h4>
                                     <p>Списки строк, упорядоченные по времени добавления</p>
                                     <pre><code>LPUSH queue:emails "email1@test.com"
-RPOP queue:emails
-LRANGE queue:emails 0 -1</code></pre>
+                                        RPOP queue:emails
+                                        LRANGE queue:emails 0 -1</code></pre>
                                 </div>
                                 
                                 <div class="data-type-card">
                                     <h4>🎯 Sets</h4>
                                     <p>Неупорядоченные коллекции уникальных строк</p>
                                     <pre><code>SADD tags:article:123 "redis" "database"
-SINTER tags:article:123 tags:article:456
-SMEMBERS tags:article:123</code></pre>
+                                        SINTER tags:article:123 tags:article:456
+                                        SMEMBERS tags:article:123</code></pre>
                                 </div>
                                 
                                 <div class="data-type-card">
                                     <h4>📊 Sorted Sets</h4>
                                     <p>Упорядоченные коллекции с весами</p>
                                     <pre><code>ZADD leaderboard 1000 "player1"
-ZADD leaderboard 800 "player2"
-ZREVRANGE leaderboard 0 2 WITHSCORES</code></pre>
+                                        ZADD leaderboard 800 "player2"
+                                        ZREVRANGE leaderboard 0 2 WITHSCORES</code></pre>
                                 </div>
                                 
                                 <div class="data-type-card">
                                     <h4>🗃️ Hashes</h4>
                                     <p>Карты полей и значений</p>
                                     <pre><code>HSET user:1000 name "John" age 30
-HGET user:1000 name
-HGETALL user:1000</code></pre>
+                                        HGET user:1000 name
+                                        HGETALL user:1000</code></pre>
                                 </div>
                             </div>
                         </section>
@@ -143,33 +143,33 @@ HGETALL user:1000</code></pre>
                                     <h4>⚡ Кэширование</h4>
                                     <p>Хранение часто запрашиваемых данных для уменьшения нагрузки на основную БД</p>
                                     <pre><code>// Сохраняем результат запроса в кэш
-SETEX page:home 300 "&lt;html&gt;...&lt;/html&gt;"
+                                        SETEX page:home 300 "&lt;html&gt;...&lt;/html&gt;"
 
-// Получаем из кэша
-GET page:home</code></pre>
+                                        // Получаем из кэша
+                                        GET page:home</code></pre>
                                 </div>
                                 
                                 <div class="use-case-card">
                                     <h4>🔐 Сессии</h4>
                                     <p>Хранение сессий пользователей с TTL</p>
                                     <pre><code>HSET session:abc123 user_id 1000 last_active 1635789000
-EXPIRE session:abc123 3600
-HGET session:abc123 user_id</code></pre>
+                                        EXPIRE session:abc123 3600
+                                        HGET session:abc123 user_id</code></pre>
                                 </div>
                                 
                                 <div class="use-case-card">
                                     <h4>📈 Счетчики и рейтинги</h4>
                                     <p>Быстрое обновление и получение счетчиков</p>
                                     <pre><code>INCR article:123:views
-ZINCRBY article_views 1 "article:123"
-ZREVRANGE article_views 0 9</code></pre>
+                                        ZINCRBY article_views 1 "article:123"
+                                        ZREVRANGE article_views 0 9</code></pre>
                                 </div>
                                 
                                 <div class="use-case-card">
                                     <h4>🔄 Очереди сообщений</h4>
                                     <p>Создание систем очередей с помощью List или Streams</p>
                                     <pre><code>LPUSH queue:emails "message1"
-BRPOP queue:emails 30  // Блокирующее получение</code></pre>
+                                        BRPOP queue:emails 30  // Блокирующее получение</code></pre>
                                 </div>
                             </div>
                         </section>
@@ -238,11 +238,11 @@ BRPOP queue:emails 30  // Блокирующее получение</code></pre>
                             
                             <h3>Пример конфигурации кластера:</h3>
                             <pre><code># redis.conf
-port 6379
-cluster-enabled yes
-cluster-config-file nodes.conf
-cluster-node-timeout 15000
-appendonly yes</code></pre>
+                                        port 6379
+                                        cluster-enabled yes
+                                        cluster-config-file nodes.conf
+                                        cluster-node-timeout 15000
+                                        appendonly yes</code></pre>
                         </section>
 
                         <section class="content-section">

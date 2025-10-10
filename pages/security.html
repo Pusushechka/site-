@@ -22,7 +22,7 @@
                     <li class="nav-item"><a href="../index.html" class="nav-link">Главная</a></li>
                     <li class="nav-item"><a href="sql.html" class="nav-link">SQL</a></li>
                     <li class="nav-item"><a href="nosql.html" class="nav-link">NoSQL</a></li>
-                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение SQL и NoSQL</a></li>
                     <li class="nav-item"><a href="mysql.html" class="nav-link">MySQL</a></li>
                 </ul>
                 
@@ -77,30 +77,30 @@
                                     <h4>Сильные пароли</h4>
                                     <p>Требования к сложности паролей</p>
                                     <pre><code>-- MySQL password policy
-SET GLOBAL validate_password.length = 8;
-SET GLOBAL validate_password.mixed_case_count = 1;
-SET GLOBAL validate_password.number_count = 1;
-SET GLOBAL validate_password.special_char_count = 1;</code></pre>
+                                    SET GLOBAL validate_password.length = 8;
+                                    SET GLOBAL validate_password.mixed_case_count = 1;
+                                    SET GLOBAL validate_password.number_count = 1;
+                                    SET GLOBAL validate_password.special_char_count = 1;</code></pre>
                                 </div>
                                 
                                 <div class="measure">
                                     <h4>Двухфакторная аутентификация</h4>
                                     <p>Дополнительный уровень безопасности</p>
                                     <pre><code>-- PostgreSQL + 2FA
--- Использование внешних систем аутентификации
--- LDAP, Kerberos, PAM</code></pre>
+                                    -- Использование внешних систем аутентификации
+                                    -- LDAP, Kerberos, PAM</code></pre>
                                 </div>
                                 
                                 <div class="measure">
                                     <h4>Ограничение попыток входа</h4>
                                     <p>Защита от brute-force атак</p>
                                     <pre><code>-- Fail2ban для MySQL
-# /etc/fail2ban/jail.local
-[mysqld-auth]
-enabled = true
-port = 3306
-logpath = /var/log/mysql/error.log
-maxretry = 3</code></pre>
+                                    # /etc/fail2ban/jail.local
+                                    [mysqld-auth]
+                                    enabled = true
+                                    port = 3306
+                                    logpath = /var/log/mysql/error.log
+                                    maxretry = 3</code></pre>
                                 </div>
                             </div>
                         </section>
@@ -113,24 +113,24 @@ maxretry = 3</code></pre>
                                 <div class="example">
                                     <h4>Создание пользователей с ограниченными правами</h4>
                                     <pre><code>-- Создание пользователя только для чтения
-CREATE USER 'reader'@'localhost' IDENTIFIED BY 'secure_password';
-GRANT SELECT ON mydatabase.* TO 'reader'@'localhost';
+                                    CREATE USER 'reader'@'localhost' IDENTIFIED BY 'secure_password';
+                                    GRANT SELECT ON mydatabase.* TO 'reader'@'localhost';
 
--- Пользователь для веб-приложения
-CREATE USER 'webapp'@'192.168.1.%' IDENTIFIED BY 'app_password';
-GRANT SELECT, INSERT, UPDATE ON mydatabase.* TO 'webapp'@'192.168.1.%';</code></pre>
+                                    -- Пользователь для веб-приложения
+                                    CREATE USER 'webapp'@'192.168.1.%' IDENTIFIED BY 'app_password';
+                                    GRANT SELECT, INSERT, UPDATE ON mydatabase.* TO 'webapp'@'192.168.1.%';</code></pre>
                                 </div>
                                 
                                 <div class="example">
                                     <h4>Ролевая модель доступа</h4>
                                     <pre><code>-- PostgreSQL роли
-CREATE ROLE read_only;
-GRANT CONNECT ON DATABASE mydb TO read_only;
-GRANT USAGE ON SCHEMA public TO read_only;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO read_only;
+                                    CREATE ROLE read_only;
+                                    GRANT CONNECT ON DATABASE mydb TO read_only;
+                                    GRANT USAGE ON SCHEMA public TO read_only;
+                                    GRANT SELECT ON ALL TABLES IN SCHEMA public TO read_only;
 
--- Назначение роли пользователю
-GRANT read_only TO web_user;</code></pre>
+                                    -- Назначение роли пользователю
+                                    GRANT read_only TO web_user;</code></pre>
                                 </div>
                             </div>
 

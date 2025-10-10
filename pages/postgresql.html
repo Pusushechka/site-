@@ -22,7 +22,7 @@
                     <li class="nav-item"><a href="../index.html" class="nav-link">Главная</a></li>
                     <li class="nav-item"><a href="sql.html" class="nav-link">SQL</a></li>
                     <li class="nav-item"><a href="nosql.html" class="nav-link">NoSQL</a></li>
-                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение SQL и NoSQL</a></li>
                     <li class="nav-item"><a href="mysql.html" class="nav-link">MySQL</a></li>
                 </ul>
                 
@@ -149,33 +149,33 @@
                                 <div class="advanced-feature">
                                     <h4>🪟 Оконные функции</h4>
                                     <pre><code>SELECT 
-    name,
-    department,
-    salary,
-    AVG(salary) OVER (PARTITION BY department) as avg_salary
-FROM employees;</code></pre>
+                                        name,
+                                            department,
+                                            salary,
+                                            AVG(salary) OVER (PARTITION BY department) as avg_salary
+                                        FROM employees;</code></pre>
                                 </div>
                                 
                                 <div class="advanced-feature">
                                     <h4>🔍 Полнотекстовый поиск</h4>
                                     <pre><code>SELECT title, content
-FROM articles
-WHERE to_tsvector('english', content) 
-      @@ to_tsquery('english', 'database & performance');</code></pre>
+                                        FROM articles
+                                        WHERE to_tsvector('english', content) 
+                                              @@ to_tsquery('english', 'database & performance');</code></pre>
                                 </div>
                                 
                                 <div class="advanced-feature">
                                     <h4>🛠️ Общие табличные выражения (CTE)</h4>
                                     <pre><code>WITH recursive categories AS (
-    SELECT id, name, parent_id
-    FROM category
-    WHERE parent_id IS NULL
-    UNION ALL
-    SELECT c.id, c.name, c.parent_id
-    FROM category c
-    JOIN categories ON c.parent_id = categories.id
-)
-SELECT * FROM categories;</code></pre>
+                                    SELECT id, name, parent_id
+                                    FROM category
+                                    WHERE parent_id IS NULL
+                                    UNION ALL
+                                    SELECT c.id, c.name, c.parent_id
+                                    FROM category c
+                                    JOIN categories ON c.parent_id = categories.id
+                                    )
+                                    SELECT * FROM categories;</code></pre>
                                 </div>
                             </div>
                         </section>
@@ -185,36 +185,36 @@ SELECT * FROM categories;</code></pre>
                             
                             <h3>Работа с JSONB:</h3>
                             <pre><code>-- Создание таблицы с JSONB
-CREATE TABLE products (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100),
-    attributes JSONB
-);
+                                CREATE TABLE products (
+                                    id SERIAL PRIMARY KEY,
+                                    name VARCHAR(100),
+                                    attributes JSONB
+                                );
+                                
+                                -- Вставка JSON данных
+                                INSERT INTO products (name, attributes) VALUES
+                                    ('Laptop', '{"brand": "Dell", "ram": 16, "storage": "512GB SSD"}'),
+                                    ('Phone', '{"brand": "Samsung", "storage": "128GB", "color": "black"}');
 
--- Вставка JSON данных
-INSERT INTO products (name, attributes) VALUES
-    ('Laptop', '{"brand": "Dell", "ram": 16, "storage": "512GB SSD"}'),
-    ('Phone', '{"brand": "Samsung", "storage": "128GB", "color": "black"}');
-
--- Запрос по JSON полю
-SELECT name FROM products 
-WHERE attributes->>'brand' = 'Dell';</code></pre>
+                                -- Запрос по JSON полю
+                                SELECT name FROM products 
+                                WHERE attributes->>'brand' = 'Dell';</code></pre>
 
                             <h3>Использование массивов:</h3>
                             <pre><code>-- Создание таблицы с массивом
-CREATE TABLE posts (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(200),
-    tags TEXT[]
-);
+                                CREATE TABLE posts (
+                                    id SERIAL PRIMARY KEY,
+                                    title VARCHAR(200),
+                                    tags TEXT[]
+                                );
 
--- Вставка данных с массивом
-INSERT INTO posts (title, tags) VALUES
-    ('PostgreSQL Guide', '{"database", "sql", "tutorial"}'),
-    ('Web Development', '{"javascript", "nodejs", "react"}');
+                                -- Вставка данных с массивом
+                                INSERT INTO posts (title, tags) VALUES
+                                    ('PostgreSQL Guide', '{"database", "sql", "tutorial"}'),
+                                    ('Web Development', '{"javascript", "nodejs", "react"}');
 
--- Поиск по массиву
-SELECT title FROM posts WHERE 'sql' = ANY(tags);</code></pre>
+                                -- Поиск по массиву
+                                SELECT title FROM posts WHERE 'sql' = ANY(tags);</code></pre>
                         </section>
 
                         <section id="vs-mysql" class="content-section">

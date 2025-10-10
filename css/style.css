@@ -50,7 +50,7 @@ body {
 }
 
 .container {
-    max-width: 2000px;
+    max-width: 1900px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -100,6 +100,7 @@ body {
     list-style: none;
     gap: 2rem;
     align-items: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .nav-link {
@@ -181,12 +182,16 @@ body {
     border-radius: 3px;
 }
 .sidebar {
-    position: sticky;  /* Делает сайдбар прилипающим */
-    top: var(--header-height);  /* Отступ от верха, чтобы не перекрывать хедер */
-    align-self: flex-start;  /* Выравнивание в flex-лейауте */
-    height: calc(100vh - var(--header-height));  /* Высота на весь экран минус хедер */
-    overflow-y: auto;  /* Скролл внутри сайдбара, если контент длинный */
-    z-index: 10;  /* Чтобы был выше основного контента */
+    position: fixed;
+    top: var(--header-height);
+    left: -var(--sidebar-width); /* Скрыт по умолчанию на mobile */
+    width: var(--sidebar-width);
+    height: calc(100vh - var(--header-height));
+    background: var(--bg-primary);
+    transition: left 0.3s ease-in-out; /* Плавное выдвижение */
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg); /* Для красоты */
 }
 
 .layout {
@@ -349,6 +354,11 @@ body {
 .main-content {
     flex: 1;
     min-width: 0; /* Important for flexbox shrinking */
+}
+
+.main-content.shifted {
+    transform: translateX(var(--sidebar-width));
+    transition: transform 0.3s ease-in-out;
 }
 
 .content-card {
@@ -994,12 +1004,16 @@ th {
         grid-template-columns: 1fr;
     }
     
-    .nav-toggle {
-        display: flex;
+    .nav-toggle, .sidebar-toggle {
+        display: flex; /* Показ кнопок */
     }
     
+    .nav-menu {
+        display: none; /* Скрыто по умолчанию */
+    }
+
     .nav-menu.active {
-        display: flex !important;
+        display: flex;
         position: absolute;
         top: 100%;
         left: 0;
@@ -1009,6 +1023,16 @@ th {
         padding: 1rem;
         box-shadow: var(--shadow-lg);
         border-top: 1px solid var(--border-color);
+    }
+
+    .layout {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .main-content {
+        width: 100%;
+        transition: transform 0.3s ease-in-out; /* Плавный сдвиг, если включено */
     }
     
     .sidebar {

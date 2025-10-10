@@ -22,7 +22,7 @@
                     <li class="nav-item"><a href="../index.html" class="nav-link">Главная</a></li>
                     <li class="nav-item"><a href="sql.html" class="nav-link active">SQL</a></li>
                     <li class="nav-item"><a href="nosql.html" class="nav-link">NoSQL</a></li>
-                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение</a></li>
+                    <li class="nav-item"><a href="comparison.html" class="nav-link">Сравнение SQL и NoSQL</a></li>
                     <li class="nav-item"><a href="mysql.html" class="nav-link">MySQL</a></li>
                 </ul>
                 
@@ -160,7 +160,7 @@
                                 <div class="code-block">
                                     <h4>INSERT - вставка данных</h4>
                                     <pre><code>INSERT INTO users (name, email, age) 
-VALUES ('Иван', 'ivan@mail.com', 25);</code></pre>
+                                    VALUES ('Иван', 'ivan@mail.com', 25);</code></pre>
                                 </div>
                                 
                                 <div class="code-block">
@@ -180,23 +180,23 @@ VALUES ('Иван', 'ivan@mail.com', 25);</code></pre>
                             
                             <h3>Создание таблицы пользователей</h3>
                             <pre><code>CREATE TABLE users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    is_active BOOLEAN DEFAULT TRUE
-);</code></pre>
+                                id INT PRIMARY KEY AUTO_INCREMENT,
+                                username VARCHAR(50) NOT NULL UNIQUE,
+                                email VARCHAR(100) NOT NULL,
+                                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                is_active BOOLEAN DEFAULT TRUE
+                            );</code></pre>
 
                             <h3>Сложный запрос с JOIN</h3>
                             <pre><code>SELECT 
-    u.username,
-    o.order_date,
-    p.product_name
-FROM users u
-JOIN orders o ON u.id = o.user_id
-JOIN products p ON o.product_id = p.id
-WHERE u.is_active = TRUE
-ORDER BY o.order_date DESC;</code></pre>
+                                u.username,
+                                o.order_date,
+                                p.product_name
+                            FROM users u
+                            JOIN orders o ON u.id = o.user_id
+                            JOIN products p ON o.product_id = p.id
+                            WHERE u.is_active = TRUE
+                            ORDER BY o.order_date DESC;</code></pre>
                         </section>
 
                         <section class="content-section">
