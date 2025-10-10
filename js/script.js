@@ -29,14 +29,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Для сайдбара
     const sidebarToggle = document.querySelector('.sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
-    const main = document.querySelector('main');  // Теперь query main без class (как в вашем HTML)
+    const layout = document.querySelector('.layout');  // Добавлено: для сдвига макета
+    const main = document.querySelector('main');
 
     if (sidebarToggle && sidebar) {
         sidebarToggle.addEventListener('click', function(event) {
             event.stopPropagation();
             const isActive = sidebar.classList.toggle('active');
             sidebarToggle.classList.toggle('active', isActive);
-            if (main) main.classList.toggle('shifted', isActive);  // Сдвиг main (опционально)
+            if (layout) layout.classList.toggle('shifted', isActive);  // Сдвиг макета
+            if (main) main.classList.toggle('shifted', isActive);  // Сдвиг основного контента
 
             if (isActive) {
                 sidebar.style.left = '0';
@@ -45,10 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // Закрытие при клике вне боковой панели
         document.addEventListener('click', function(event) {
             if (!sidebarToggle.contains(event.target) && !sidebar.contains(event.target)) {
                 sidebar.classList.remove('active');
                 sidebarToggle.classList.remove('active');
+                if (layout) layout.classList.remove('shifted');
                 if (main) main.classList.remove('shifted');
                 sidebar.style.left = '-var(--sidebar-width)';
             }

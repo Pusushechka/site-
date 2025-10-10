@@ -159,18 +159,28 @@ body {
     display: flex;
     gap: 2rem;
     align-items: flex-start;
+    padding-left: 0;  /* Нет отступа или сдвига, чтобы контент не уходил */
+    /* Удалите любые transition или transform, связанные со shifted */
+}
+
+.layout.shifted,
+.main-content.shifted {
+    transform: none !important;
 }
 
 /* ===== SIDEBAR ===== */
 .sidebar {
-    background: var(--bg-primary); /* Или градиент: linear-gradient(180deg, #f8fafc, #ffffff); */
-    border-radius: var(--border-radius-lg);
-    padding: 1.5rem;
-    box-shadow: var(--shadow-sm); /* Мягкая тень */
-    border: none; /* Убрать бордер */
-    overflow-y: auto; /* Вернуть скролл, но с кастомным стилем */
-    scrollbar-width: thin; /* Тонкий скролл в Firefox */
-    scrollbar-color: var(--primary-color) var(--bg-tertiary);
+    position: fixed;
+    top: var(--header-height);
+    left: -var(--sidebar-width);
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-min-width);
+    height: calc(100vh - var(--header-height));
+    background: var(--bg-primary);
+    overflow-y: auto;
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+    clip-path: inset(0 0 0 100%);  /* Полная обрезка видимости при скрытии */
 }
 
 .sidebar::-webkit-scrollbar {
@@ -180,23 +190,6 @@ body {
 .sidebar::-webkit-scrollbar-thumb {
     background: var(--primary-color);
     border-radius: 3px;
-}
-.sidebar {
-    position: sticky;  /* По умолчанию для desktop */
-    top: var(--header-height);
-    left: 0;
-    width: var(--sidebar-width);
-    height: calc(100vh - var(--header-height));
-    background: var(--bg-primary);
-    overflow-y: auto;
-    box-shadow: var(--shadow-sm);
-    transition: left 0.3s ease-in-out;  /* Анимация */
-}
-
-.layout {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;  
 }
 
 .sidebar-section {
@@ -210,11 +203,6 @@ body {
     margin-bottom: 1rem;
 }
 
-.sidebar {
-    width: var(--sidebar-width);
-    min-width: var(--sidebar-min-width);
-    max-width: var(--sidebar-width); 
-}
 
 /* Ссылки в навигации */
 .sidebar-nav a {
@@ -353,11 +341,6 @@ body {
 .main-content {
     flex: 1;
     min-width: 0; /* Important for flexbox shrinking */
-}
-
-main.shifted {
-    transform: translateX(var(--sidebar-width));
-    transition: transform 0.3s ease-in-out;
 }
 
 .content-card {
@@ -1041,11 +1024,6 @@ th {
     }
 }
 
-    .main-content.shifted {
-        transform: translateX(var(--sidebar-width));
-        transition: transform 0.3s ease-in-out;
-    }
-
     .sidebar-toggle {
         display: flex !important;  /* Force show button */
     }
@@ -1057,8 +1035,9 @@ th {
     }
 
     .sidebar.active {
-    left: 0; /* Полностью выдвинут */
-    }
+    left: 0;
+    clip-path: none;  /* Отмена обрезки при активации */
+}
 
     .sidebar::-webkit-scrollbar {
         display: none; /* Скрытие полосы в Chrome/Safari/Opera */
