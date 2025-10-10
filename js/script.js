@@ -4,18 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMenu = document.querySelector('.nav-menu');
 
     if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function(event) {
-            event.stopPropagation();
+        navToggle.addEventListener('click', function() {
             navToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
-            if (navMenu.classList.contains('active')) {
-                navMenu.style.opacity = '0';
-                navMenu.style.transform = 'translateY(-10px)';
-                setTimeout(() => {
-                    navMenu.style.opacity = '1';
-                    navMenu.style.transform = 'translateY(0)';
-                }, 10);
-            }
         });
 
         document.addEventListener('click', function(event) {
@@ -29,32 +20,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Для сайдбара
     const sidebarToggle = document.querySelector('.sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
-    const layout = document.querySelector('.layout');  // Добавлено: для сдвига макета
-    const main = document.querySelector('main');
+    const mainContent = document.querySelector('.main-content');
 
     if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', function(event) {
-            event.stopPropagation();
+        sidebarToggle.addEventListener('click', function() {
             const isActive = sidebar.classList.toggle('active');
-            sidebarToggle.classList.toggle('active', isActive);
-            if (layout) layout.classList.toggle('shifted', isActive);  // Сдвиг макета
-            if (main) main.classList.toggle('shifted', isActive);  // Сдвиг основного контента
+            sidebarToggle.classList.toggle('active');
+            
+            // Сдвигаем и уменьшаем основной контент
+            if (mainContent) mainContent.classList.toggle('shifted', isActive);
+        });
 
-            if (isActive) {
-                sidebar.style.left = '0';
-            } else {
-                sidebar.style.left = '-var(--sidebar-width)';
+        // Закрытие при клике вне сайдбара
+        document.addEventListener('click', function(event) {
+            if (sidebar.classList.contains('active') && 
+                !sidebarToggle.contains(event.target) && 
+                !sidebar.contains(event.target)) {
+                sidebar.classList.remove('active');
+                sidebarToggle.classList.remove('active');
+                if (mainContent) mainContent.classList.remove('shifted');
             }
         });
 
-        // Закрытие при клике вне боковой панели
-        document.addEventListener('click', function(event) {
-            if (!sidebarToggle.contains(event.target) && !sidebar.contains(event.target)) {
+        // Закрытие при нажатии Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && sidebar.classList.contains('active')) {
                 sidebar.classList.remove('active');
                 sidebarToggle.classList.remove('active');
-                if (layout) layout.classList.remove('shifted');
-                if (main) main.classList.remove('shifted');
-                sidebar.style.left = '-var(--sidebar-width)';
+                if (mainContent) mainContent.classList.remove('shifted');
             }
         });
     }

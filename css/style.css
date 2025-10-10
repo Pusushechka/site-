@@ -163,16 +163,21 @@ body {
     /* Удалите любые transition или transform, связанные со shifted */
 }
 
-.layout.shifted,
+.main-content {
+    transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+    width: 100%;
+}
+
 .main-content.shifted {
-    transform: none !important;
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
 }
 
 /* ===== SIDEBAR ===== */
 .sidebar {
     position: fixed;
     top: var(--header-height);
-    left: -var(--sidebar-width);
+    left: -100%; /* Используем проценты вместо фиксированной ширины */
     width: var(--sidebar-width);
     min-width: var(--sidebar-min-width);
     height: calc(100vh - var(--header-height));
@@ -180,7 +185,8 @@ body {
     overflow-y: auto;
     transition: left 0.3s ease-in-out;
     z-index: 1000;
-    clip-path: inset(0 0 0 100%);  /* Полная обрезка видимости при скрытии */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid var(--border-color);
 }
 
 .sidebar::-webkit-scrollbar {
@@ -954,24 +960,22 @@ th {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 1200px) {
-    .container {
-        max-width: 100%;
-        padding: 0 20px;
-    }
-}
-
 @media (max-width: 1024px) {
     .sidebar {
-        position: sticky;
+        position: static; /* На десктопе сайдбар в потоке */
         left: 0;
-        transition: none;
-    }
-
-    .sidebar-toggle {
-        display: none;
+        width: var(--sidebar-width);
     }
     
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .sidebar-toggle {
+        display: none !important;
+    }
+ 
     .comparison-overview,
     .concepts-comparison,
     .clustering-info {
@@ -1018,33 +1022,25 @@ th {
         gap: 0;
     }
 
-    main {
-        width: 100%;  /* Контент полный */
-        transition: transform 0.3s ease-in-out;
-    }
-}
-
     .sidebar-toggle {
         display: flex !important;  /* Force show button */
     }
     
     .sidebar {
-        position: fixed;  /* Fixed для overlay */
-        left: -var(--sidebar-width);  /* Полностью скрыт */
-        z-index: 1000;
+        position: fixed;
+        left: -100%;
     }
 
     .sidebar.active {
-    left: 0;
-    clip-path: none;  /* Отмена обрезки при активации */
-}
+        left: 0;
+    }
 
     .sidebar::-webkit-scrollbar {
         display: none; /* Скрытие полосы в Chrome/Safari/Opera */
     }
 
     .sidebar-toggle {
-        display: flex; /* Кнопка видна */
+        display: flex !important;
     }
     
     .main-content {
@@ -1235,4 +1231,35 @@ input:focus {
         opacity: 1;
         transform: translateY(0);
     }
+}
+.sidebar-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    gap: 4px;
+    margin-left: auto;
+}
+
+.sidebar-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--text-primary);
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+.sidebar-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.sidebar-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.sidebar-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
 }
