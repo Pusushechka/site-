@@ -69,9 +69,10 @@ body {
 .navbar {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Равномерное распределение */
+    justify-content: space-between;
     height: var(--header-height);
     width: 100%;
+    position: relative;
 }
 
 .logo {
@@ -187,7 +188,6 @@ body {
     overflow-y: auto;
     transition: left 0.3s ease-in-out;
     z-index: 1000;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     border-right: 1px solid var(--border-color);
 }
 
@@ -209,6 +209,7 @@ body {
 }
 
 .sidebar-section h3 {
+    padding-left: 1.5rem;
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -218,6 +219,7 @@ body {
 
 /* Ссылки в навигации */
 .sidebar-nav a {
+    padding-left: 1.5rem;
     display: flex;
     align-items: center;
     gap: 0.75rem; /* Пространство между иконкой и текстом */
