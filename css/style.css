@@ -178,17 +178,19 @@ body {
 
 /* ===== SIDEBAR ===== */
 .sidebar {
-    position: fixed;
+    position: sticky;
     top: var(--header-height);
-    left: -320px; /* Полностью скрыт за левым краем */
+    left: -320px;
     width: var(--sidebar-width);
     min-width: var(--sidebar-min-width);
-    height: calc(100vh - var(--header-height));
+    height: calc(100vh - var(--header-height)); /* Уже есть */
+    max-height: calc(100vh - var(--header-height)); /* Добавьте это */
     background: var(--bg-primary);
     overflow-y: auto;
     transition: left 0.3s ease-in-out;
-    z-index: 1000;
+    z-index: 0;
     border-right: 1px solid var(--border-color);
+    padding: 1.5rem;
 }
 
 .sidebar.active {
@@ -209,13 +211,11 @@ body {
 }
 
 .sidebar-section h3 {
-    padding-left: 1.5rem;
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-primary);
     margin-bottom: 1rem;
 }
-
 
 /* Ссылки в навигации */
 .sidebar-nav a {
@@ -544,6 +544,7 @@ body {
     color: white;
     padding: 3rem 0 1rem;
     margin-top: 4rem;
+    position: relative;
 }
 
 .footer-content {
@@ -968,30 +969,26 @@ th {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 1024px) {
-    .sidebar {
-        position: static; /* На десктопе сайдбар в потоке */
-        left: 0;
-        width: var(--sidebar-width);
-    }
-    
-    .main-content {
-        margin-left: 0;
-        width: 100%;
-    }
- 
-    .comparison-overview,
-    .concepts-comparison,
-    .clustering-info {
-        grid-template-columns: 1fr;
-    }
-    
-    .crud-operations {
-        grid-template-columns: 1fr;
-    }
-}
 
-@media (max-width: 768px) {
+@media (max-width: 9999px) {
+    .nav-link-mobile{
+    display: none;
+    }
+
+.nav-link-mobile.active{
+    display: none;
+    }
+    }
+
+@media (max-width: 550px) {
+    .nav-link-mobile{
+        display: flex;
+    }
+
+    .nav-link-mobile.active{
+    display: flex;
+    }
+
     .nav-menu {
         display: none;
     }
@@ -999,13 +996,13 @@ th {
     .cards-grid {
         grid-template-columns: 1fr;
     }
-    
-    .nav-toggle, .sidebar-toggle {
-        display: flex; /* Показ кнопок */
+
+    .sidebar{
+        display:none;
     }
-    
-    .nav-menu {
-        display: none; /* Скрыто по умолчанию */
+
+    .nav-toggle{
+        display: flex; /* Показ кнопок */
     }
 
     .nav-menu.active {
@@ -1073,30 +1070,6 @@ th {
         flex-direction: column;
         align-items: flex-start;
         text-align: left;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .content-card {
-        padding: 1rem;
-    }
-    
-    .article-title {
-        font-size: 1.75rem;
-    }
-    
-    .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.5rem;
-    }
-    
-    .advantage-item {
-        flex-direction: column;
-        text-align: center;
     }
 }
 
@@ -1230,10 +1203,6 @@ input:focus {
     }
 }
 
-.animate-in {
-    animation: slideInUp 0.8s ease-out forwards;
-}
-
 @keyframes slideInUp {
     from {
         opacity: 0;
@@ -1245,38 +1214,29 @@ input:focus {
     }
 }
 
-.sidebar-toggle {
-    display: flex;
-    flex-direction: column;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    gap: 4px;
-    margin-left: auto;
+.nav-link-mobile{
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-.sidebar-toggle span {
-    width: 25px;
-    height: 3px;
-    background: var(--text-primary);
-    transition: 0.3s;
-    border-radius: 2px;
+.nav-link-mobile.active {
+    color: var(--primary-color);
+    background: var(--bg-tertiary);
 }
 
-.sidebar-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.sidebar-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.sidebar-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
-.sidebar-toggle {
-    order: 2; /* Кнопка будет в конце */
-    margin-left: auto; /* Автоматический отступ слева */
+.nav-link-mobile.active::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 50%;
 }

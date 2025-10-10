@@ -19,13 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Для сайдбара
     const sidebarToggle = document.querySelector('.sidebar-toggle');
-    const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content');
+const sidebar = document.querySelector('.sidebar');
+const mainContent = document.querySelector('.main-content');
 
-    if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', function() {
-            const isActive = sidebar.classList.toggle('active');
-            sidebarToggle.classList.toggle('active');
+if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener('click', function() {
+        const isActive = sidebar.classList.toggle('active');
+        sidebarToggle.classList.toggle('active');
             
             // Сдвигаем и уменьшаем основной контент
             if (mainContent) mainContent.classList.toggle('shifted', isActive);
