@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Для основной навигации (header nav)
+    // Для основной навигации
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
 
     if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
+        navToggle.addEventListener('click', function(event) {
+            event.stopPropagation();
             navToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
-            // Анимация: добавляем fade-in для меню
             if (navMenu.classList.contains('active')) {
                 navMenu.style.opacity = '0';
                 navMenu.style.transform = 'translateY(-10px)';
@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Закрытие меню при клике вне
         document.addEventListener('click', function(event) {
             if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
                 navToggle.classList.remove('active');
@@ -27,34 +26,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Для сайдбара (aside) с плавным выдвижением
+    // Для сайдбара
     const sidebarToggle = document.querySelector('.sidebar-toggle');
     const sidebar = document.querySelector('.sidebar');
-    const mainContent = document.querySelector('.main-content'); // Для сдвига контента (опционально)
+    const main = document.querySelector('main');  // Теперь query main без class (как в вашем HTML)
 
     if (sidebarToggle && sidebar) {
-        sidebarToggle.addEventListener('click', function() {
-            sidebarToggle.classList.toggle('active');
-            sidebar.classList.toggle('active');
-            // mainContent.classList.toggle('shifted'); // Если хотите сдвигать контент (раскомментируйте)
+        sidebarToggle.addEventListener('click', function(event) {
+            event.stopPropagation();
+            const isActive = sidebar.classList.toggle('active');
+            sidebarToggle.classList.toggle('active', isActive);
+            if (main) main.classList.toggle('shifted', isActive);  // Сдвиг main (опционально)
 
-            // Плавная анимация выдвижения
-            if (sidebar.classList.contains('active')) {
-                sidebar.style.left = '-var(--sidebar-width)'; // Стартовое положение
-                setTimeout(() => {
-                    sidebar.style.left = '0'; // Выдвигаем
-                }, 10);
+            if (isActive) {
+                sidebar.style.left = '0';
             } else {
-                sidebar.style.left = '-var(--sidebar-width)'; // Скрываем
+                sidebar.style.left = '-var(--sidebar-width)';
             }
         });
 
-        // Закрытие сайдбара при клике вне
         document.addEventListener('click', function(event) {
             if (!sidebarToggle.contains(event.target) && !sidebar.contains(event.target)) {
-                sidebarToggle.classList.remove('active');
                 sidebar.classList.remove('active');
-                // mainContent.classList.remove('shifted');
+                sidebarToggle.classList.remove('active');
+                if (main) main.classList.remove('shifted');
                 sidebar.style.left = '-var(--sidebar-width)';
             }
         });

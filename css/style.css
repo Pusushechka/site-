@@ -182,16 +182,15 @@ body {
     border-radius: 3px;
 }
 .sidebar {
-    position: fixed;
+    position: sticky;  /* По умолчанию для desktop */
     top: var(--header-height);
-    left: -var(--sidebar-width); /* Скрыт по умолчанию на mobile */
+    left: 0;
     width: var(--sidebar-width);
     height: calc(100vh - var(--header-height));
     background: var(--bg-primary);
-    transition: left 0.3s ease-in-out; /* Плавное выдвижение */
-    z-index: 1000;
     overflow-y: auto;
-    box-shadow: var(--shadow-lg); /* Для красоты */
+    box-shadow: var(--shadow-sm);
+    transition: left 0.3s ease-in-out;  /* Анимация */
 }
 
 .layout {
@@ -356,7 +355,7 @@ body {
     min-width: 0; /* Important for flexbox shrinking */
 }
 
-.main-content.shifted {
+main.shifted {
     transform: translateX(var(--sidebar-width));
     transition: transform 0.3s ease-in-out;
 }
@@ -981,7 +980,13 @@ th {
 
 @media (max-width: 1024px) {
     .sidebar {
-        width: 280px;
+        position: sticky;
+        left: 0;
+        transition: none;
+    }
+
+    .sidebar-toggle {
+        display: none;
     }
     
     .comparison-overview,
@@ -1030,21 +1035,37 @@ th {
         gap: 0;
     }
 
-    .main-content {
-        width: 100%;
-        transition: transform 0.3s ease-in-out; /* Плавный сдвиг, если включено */
+    main {
+        width: 100%;  /* Контент полный */
+        transition: transform 0.3s ease-in-out;
+    }
+}
+
+    .main-content.shifted {
+        transform: translateX(var(--sidebar-width));
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .sidebar-toggle {
+        display: flex !important;  /* Force show button */
     }
     
     .sidebar {
-        width: var(--sidebar-min-width);
-        left: -var(--sidebar-min-width);  /* Смещение для slide-out */
+        position: fixed;  /* Fixed для overlay */
+        left: -var(--sidebar-width);  /* Полностью скрыт */
+        z-index: 1000;
     }
+
     .sidebar.active {
-        left: 0;
+    left: 0; /* Полностью выдвинут */
     }
 
     .sidebar::-webkit-scrollbar {
         display: none; /* Скрытие полосы в Chrome/Safari/Opera */
+    }
+
+    .sidebar-toggle {
+        display: flex; /* Кнопка видна */
     }
     
     .main-content {
@@ -1086,7 +1107,6 @@ th {
         align-items: flex-start;
         text-align: left;
     }
-}
 
 @media (max-width: 480px) {
     .container {
