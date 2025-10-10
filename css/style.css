@@ -69,9 +69,9 @@ body {
 .navbar {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Изменено с space-between на flex-start для предотвращения сдвига вправо */
+    justify-content: space-between; /* Равномерное распределение */
     height: var(--header-height);
-    gap: 2rem; /* Добавлен зазор для сбалансированного расстояния между логотипом и меню */
+    width: 100%;
 }
 
 .logo {
@@ -101,6 +101,8 @@ body {
     gap: 2rem;
     align-items: center;
     transition: opacity 0.3s ease, transform 0.3s ease;
+    margin: 0 auto; /* Центрирование */
+    order: 1; /* Меню будет посередине */
 }
 
 .nav-link {
@@ -1270,4 +1272,9 @@ input:focus {
 
 .sidebar-toggle.active span:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
+}
+
+.sidebar-toggle {
+    order: 2; /* Кнопка будет в конце */
+    margin-left: auto; /* Автоматический отступ слева */
 }
