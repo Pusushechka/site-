@@ -1,0 +1,1 @@
+Nothing should be ignored in this case, as the changes only include source files (CSS, HTML) and an image file (SVG), with no build artifacts, dependencies, or temporary files present.
