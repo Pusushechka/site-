@@ -391,6 +391,28 @@ body {
     margin: 0 auto;
 }
 
+/* Hero Image */
+.hero-image-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 768px) {
+    .hero-image {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
 .content-section {
     margin-bottom: 3rem;
 }
